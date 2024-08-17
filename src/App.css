@@ -1,0 +1,15 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "New Amsterdam", sans-serif;
+  font-style: normal;
+}
+.slick-list {
+  margin: 0 97px;
+}
+
+.slick-active .custom-dot {
+  background-color: white; 
+  
+}
