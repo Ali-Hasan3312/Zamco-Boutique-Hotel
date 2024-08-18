@@ -1,92 +1,81 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
-const ImgSlider = () => {
-    
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        pauseOnFocus: true, 
-        pauseOnHover: true,
-        dotsClass: "slick-dots custom-dots",
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    initialSlide: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    };
+import { useEffect, useState } from "react";
+import '../App.css'; // Add this line to import your CSS
+import Background from "./Background";
+import { Link } from "react-router-dom";
 
-    const data = [
-       
+interface dataProps {
+  heading: string;
+  p: string;
+}
+const ImgSlider = () => {
+ 
+    const [heroCount,setHeroCount] = useState(0);
+    
+    const data: dataProps[] = [
         {
-            img: "https://images.unsplash.com/photo-1523699289804-55347c09047d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWxzfGVufDB8fDB8fHww",
-            heading: "Welcom to Zamco Boutique hotel",
+           
+            heading: "Welcome to Zamco Boutique Hotel",
             p: `A special place where you can stay and relax`,
-            link: "#"
+           
         },
         {
-            img: "https://plus.unsplash.com/premium_photo-1676321688630-9558e7d2be10?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWxzfGVufDB8fDB8fHww",
-            heading: "serving travellers on a budget",
-            p: `we provide comfortable accomodation for you`,
-            link: "#"
+          
+            heading: "Serving travelers on a budget",
+            p: `We provide comfortable accommodation for you`,
+           
         },
         {
-            img: "https://plus.unsplash.com/premium_photo-1676321688607-2d18ba129dbd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D",
+           
             heading: "A perfect and affordable place to stay",
-            p: `Take advantage of the budget oriented accomodation`,
-            link: "#"
+            p: `Take advantage of the budget-oriented accommodation`,
+           
         },
-      
-       
+        
     ];
-  return (
-    <div className='w-full'>
-            <div className='w-full'>
-                <Slider {...settings}>
-                    {data.map((d, index) => (
-                        <div key={index} className='p-1'>
-                            <div className=' h-[280px] w-full mx-1 rounded-xl flex flex-col items-center text-center relative'>
-                                <div className='bg-gray-100 w-full flex justify-center pt-8 rounded-lg'>
-                                    <img src={d.img} className=' object-cover' alt="" />
-                                </div>
-                                <h2 className='w-[240px] mt-8 text-xl font-bold'>{d.heading}</h2>
-                                <p className='w-[240px] mt-7 text-gray-500'>{d.p}</p>
-                                <button className='py-2 px-4 bg-customGreen mt-6 rounded-lg text-white'>Apply Now</button>
-                                <a href={d.link} className='h-full w-full absolute'></a>
-                            </div>
-                        </div>
-                    ))}
-                </Slider>
+    useEffect(()=>{
+     setInterval(()=>{
+     setHeroCount((prev)=>{
+      return prev===2? 0 : prev+1
+     })
+     },5000)
+    },[])
+
+    return (
+      <div className="relative">
+      <Background stateValue={heroCount}/>
+      <div className="absolute top-20 left-[30%]">
+      {heroCount === 0 && (
+          <div className="flex flex-col items-center justify-center gap-8 uppercase">
+            <h1 className=" text-yellow-400 text-xl tracking-wider ">{data[0].heading}</h1>
+            <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">A special place where <br /> you can stay and relax</p>
+            <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
+          </div>
+        )}
+        {
+          heroCount === 1 && (
+            <div className="flex flex-col items-center justify-center gap-8 uppercase">
+            <h1 className=" text-yellow-400 text-xl tracking-wider">{data[1].heading}</h1>
+            <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">We provide comfortable <br /> accommodation for you</p>
+            <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
             </div>
-        </div>
-  )
+            
+        )}
+        {
+          heroCount === 2 && (
+            <div className="flex flex-col items-center justify-center gap-8 uppercase">
+            <h1 className=" text-yellow-400 text-xl tracking-wider">{data[2].heading}</h1>
+            <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">Take advantage of the budget <br /> oriented accommodation</p>
+              <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
+            </div>
+        )}
+      </div>
+      <div className="flex flex-col gap-4 absolute top-48 right-4">
+       <div className={`h-3 w-3 bg-gray-400 cursor-pointer hover:bg-yellow-400 hover:transition-all hover:duration-300 ${heroCount===0? "bg-yellow-400":""}`} onClick={()=>setHeroCount(0)}></div>
+       <div className={`h-3 w-3 bg-gray-400 cursor-pointer hover:bg-yellow-400 hover:transition-all hover:duration-300 ${heroCount===1? "bg-yellow-400":""}`} onClick={()=>setHeroCount(1)}></div>
+       <div className={`h-3 w-3 bg-gray-400 cursor-pointer hover:bg-yellow-400 hover:transition-all hover:duration-300 ${heroCount===2? "bg-yellow-400":""}`} onClick={()=>setHeroCount(2)}></div>
+      </div>
+      </div>
+    );
 }
 
-export default ImgSlider
+export default ImgSlider;

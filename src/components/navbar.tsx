@@ -15,7 +15,7 @@ const Navbar = () => {
        <div className="h-16 w-28 text-4xl cursor-pointer tracking-wide text-gray-800 flex items-center text-nowrap gap-4">
             
             <img src={logo} alt="" />
-            <span>Visit Hotel</span>
+           
         </div>
        </div>
         <div className="flex items-center text-2xl tracking-wide gap-16">

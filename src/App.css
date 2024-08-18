@@ -2,14 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "New Amsterdam", sans-serif;
-  font-style: normal;
-}
-.slick-list {
-  margin: 0 97px;
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;  
 }
 
-.slick-active .custom-dot {
-  background-color: white; 
-  
-}
