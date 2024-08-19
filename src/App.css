@@ -6,4 +6,29 @@
   font-optical-sizing: auto;
   
 }
+.hexagon {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+.sim-card {
+  width: 150px;              /* Width of the SIM card */
+  height: 250px;             /* Height of the SIM card */
+  background-color: #f5f5f5; /* Background color of the SIM card */
+  border-radius: 40px 40px 0 0; /* Rounded top corners */
+  border: 2px solid #ccc;    /* Border around the SIM card */
+  position: relative;        /* To position the pseudo-element */
+  overflow: hidden;          /* Hide the pseudo-element overflow */
+}
 
+/* Cutting edge using a pseudo-element */
+.sim-card::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60px;              /* Width of the cutting edge */
+  height: 60px;             /* Height of the cutting edge */
+  background-color: #f5f5f5; /* Same as the SIM card background */
+  transform: translate(20px, 20px) rotate(45deg); /* Cut edge effect */
+  border-left: 2px solid #ccc; /* Border to match the SIM card */
+  border-top: 2px solid #ccc;  /* Border to match the SIM card */
+}

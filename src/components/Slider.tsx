@@ -53,7 +53,7 @@ const ImgSlider = () => {
         )}
         {
           heroCount === 1 && (
-            <div className="flex flex-col items-center justify-center gap-8 uppercase">
+            <div className="flex flex-col items-center justify-center gap-8 uppercase -ml-8">
             <h1 className=" text-yellow-400 text-xl tracking-wider">{data[1].heading}</h1>
             <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">We provide comfortable <br /> accommodation for you</p>
             <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
@@ -62,7 +62,7 @@ const ImgSlider = () => {
         )}
         {
           heroCount === 2 && (
-            <div className="flex flex-col items-center justify-center gap-8 uppercase">
+            <div className="flex flex-col items-center justify-center gap-8 uppercase -ml-16">
             <h1 className=" text-yellow-400 text-xl tracking-wider">{data[2].heading}</h1>
             <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">Take advantage of the budget <br /> oriented accommodation</p>
               <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
