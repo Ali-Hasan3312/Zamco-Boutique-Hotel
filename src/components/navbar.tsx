@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 import logo from "../assets/Zamco_logo.jpg";
 import { useState } from "react";
 
-// interface NavItemProps{
-//   to: string;
-//   children: 
-// }
-const NavItem = ({ to, children }:any) => {
+interface NavItemProps{
+  to: string;
+  children: React.ReactNode;
+}
+const NavItem = ({ to, children }:NavItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
