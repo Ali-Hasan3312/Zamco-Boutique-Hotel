@@ -4,9 +4,8 @@ import { FaWifi } from "react-icons/fa6";
 import { MdLocalLaundryService, MdOutlineLockOpen } from "react-icons/md";
 import { TbAirConditioning, TbToolsKitchen2 } from "react-icons/tb";
 import ServicesProps from "../components/ServicesProps";
-
-
-
+import { motion } from "framer-motion";
+import { FadeUp } from "../utils/animation";
 
 
 const Services = () => {
@@ -14,7 +13,11 @@ const Services = () => {
   return (
     <div className="mt-24">
         <h1 className=" text-2xl tracking-wide font-medium uppercase text-center">What we offer</h1>
-        <div className=" grid grid-cols-4 gap-2 mt-10 ml-20">
+        <motion.div className=" grid grid-cols-4 gap-2 mt-10 ml-20"
+        variants={FadeUp(0.3)}
+        initial="hidden"
+        whileInView={"visible"}
+        >
             <ServicesProps
             icon = {<BsCupHot className="text-custom-yellow text-[40px] opacity-85"/>}
             title="Tea & coffee"
@@ -55,7 +58,7 @@ const Services = () => {
             title="lockers"
             description="If you carry any valuable items, feel free to store them in our hostel’s lockers."
             />
-        </div>
+        </motion.div>
     </div>
   )
 }

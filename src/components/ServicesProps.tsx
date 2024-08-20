@@ -16,6 +16,7 @@ const ServicesProps = ({icon, title, description}:ServiceTypes) => {
     <div className="flex flex-col items-start justify-center h-[200px] w-[200px] text-start gap-2 mt-8"
      onMouseEnter={() => setIsHovered(true)}
      onMouseLeave={() => setIsHovered(false)}
+     
     >
     <div className="hexagon w-24 h-16 font-normal bg-gray-200 flex items-center opacity-80 justify-center">
     {icon}

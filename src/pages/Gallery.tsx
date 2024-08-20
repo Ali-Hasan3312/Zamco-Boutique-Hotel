@@ -7,25 +7,11 @@ import image5 from "../assets/Rooms_pix/room5.jpg"
 import image6 from "../assets/Rooms_pix/room6.jpg"
 import image7 from "../assets/Rooms_pix/room7.jpg"
 import image8 from "../assets/Rooms_pix/room8.jpg"
-import { useState } from 'react'
-import { FaSearchPlus } from "react-icons/fa";
+import GalleryProps from '../components/GalleryProps'
 
 const Gallery = () => {
-    const [hoverStates, setHoverStates] = useState(Array(8).fill(false));
+  
 
-  // Function to handle mouse enter
-  const handleMouseEnter = (index:any) => {
-    const newHoverStates = [...hoverStates];
-    newHoverStates[index] = true;
-    setHoverStates(newHoverStates);
-  };
-
-  // Function to handle mouse leave
-  const handleMouseLeave = (index:any) => {
-    const newHoverStates = [...hoverStates];
-    newHoverStates[index] = false;
-    setHoverStates(newHoverStates);
-  };
     
   return (
     <div className=' mt-12'>
@@ -42,28 +28,14 @@ const Gallery = () => {
         </div>
        </div>
        <div className='grid grid-cols-4 gap-3 mt-10 ml-6'>
-      {[image1, image2, image3, image4, image5, image6, image7, image8].map((image, index) => (
-        <div
-          key={index}
-          className={`h-[300px] w-[300px] relative`}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={() => handleMouseLeave(index)}
-        >
-          <img
-            src={image}
-            className={`h-full w-full transition-transform duration-300 ease-in-out ${hoverStates[index] ? "scale-90" : ""}`}
-            alt=""
-          />
-          {hoverStates[index] && (
-            <div className='absolute h-[250px] w-[250px] flex items-center justify-center top-6 left-6 border border-gray-400'>
-              <div className='flex flex-col items-center justify-center text-2xl text-white'>
-                <FaSearchPlus />
-                <Link to={"#"} className='uppercase font-semibold'>{`Room #${index + 1}`}</Link>
-              </div>
-            </div>
-          )}
-        </div>
-      ))}
+       <GalleryProps to='#' image={image1} room={1}  />
+       <GalleryProps to='#' image={image2} room={2} />
+       <GalleryProps to='#' image={image3} room={3} />
+       <GalleryProps to='#' image={image4} room={4} />
+       <GalleryProps to='#' image={image5} room={5} />
+       <GalleryProps to='#' image={image6} room={6} />
+       <GalleryProps to='#' image={image7} room={7} />
+       <GalleryProps to='#' image={image8} room={8} />
     </div>
     </div>
   )

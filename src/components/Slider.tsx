@@ -1,8 +1,8 @@
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import '../App.css'; // Add this line to import your CSS
 import Background from "./Background";
-import { Link } from "react-router-dom";
-
 interface dataProps {
   heading: string;
   p: string;
@@ -32,41 +32,55 @@ const ImgSlider = () => {
         },
         
     ];
+    
     useEffect(()=>{
-     setInterval(()=>{
-     setHeroCount((prev)=>{
-      return prev===2? 0 : prev+1
-     })
-     },5000)
+      setInterval(()=>{
+        setHeroCount((prev)=>{
+         return prev===2? 0 : prev+1
+        })
+        },5000)
     },[])
 
     return (
       <div className="relative">
       <Background stateValue={heroCount}/>
-      <div className="absolute top-20 left-[30%]">
+      <div 
+      className="absolute top-20 left-[30%]">
       {heroCount === 0 && (
-          <div className="flex flex-col items-center justify-center gap-8 uppercase">
+          <motion.div 
+          initial={{opacity: 0, x: -200}}
+          whileInView={{opacity:1, x:0}}
+          transition={{duration: 1, delay: 0.3}}
+          className="flex flex-col items-center justify-center gap-8 uppercase">
             <h1 className=" text-yellow-400 text-xl tracking-wider ">{data[0].heading}</h1>
             <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">A special place where <br /> you can stay and relax</p>
             <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
-          </div>
+            </motion.div>
         )}
         {
           heroCount === 1 && (
-            <div className="flex flex-col items-center justify-center gap-8 uppercase -ml-8">
+            <motion.div 
+            initial={{opacity: 0, x: -200}}
+            whileInView={{opacity:1, x:0}}
+            transition={{duration: 1, delay: 0.3}}
+             className="flex flex-col items-center justify-center gap-8 uppercase -ml-8">
             <h1 className=" text-yellow-400 text-xl tracking-wider">{data[1].heading}</h1>
             <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">We provide comfortable <br /> accommodation for you</p>
             <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
-            </div>
+            </motion.div>
             
         )}
         {
           heroCount === 2 && (
-            <div className="flex flex-col items-center justify-center gap-8 uppercase -ml-16">
+            <motion.div 
+      initial={{opacity: 0, x: -200}}
+      whileInView={{opacity:1, x:0}}
+      transition={{duration: 1, delay: 0.3}}
+            className="flex flex-col items-center justify-center gap-8 uppercase -ml-16">
             <h1 className=" text-yellow-400 text-xl tracking-wider">{data[2].heading}</h1>
             <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">Take advantage of the budget <br /> oriented accommodation</p>
               <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
-            </div>
+              </motion.div>
         )}
       </div>
       <div className="flex flex-col gap-4 absolute top-48 right-4">

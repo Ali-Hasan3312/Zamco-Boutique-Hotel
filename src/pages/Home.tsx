@@ -1,21 +1,29 @@
-import Cards from '../components/Cards'
-import Gallery from '../components/Gallery'
-import Navbar from '../components/navbar'
-import Services from './Services'
-import ImgSlider from '../components/Slider'
-import OurRooms from './OurRooms'
-
-
+import { lazy, Suspense } from 'react'
+import Footer from '../components/Footer'
+const Navbar = lazy(()=> import("../components/navbar"))
+const InfoGrid = lazy(()=> import('./InfoGrid'))
+const Gallery = lazy(()=> import('./Gallery'))
+const Services = lazy(()=> import('./Services'))
+const ImgSlider = lazy(()=> import('../components/Slider'))
+const OurRooms = lazy(()=> import('./OurRooms'))
+const Loader = lazy(() => import("../components/Loader"));
+const SignUp = lazy(() => import("../components/SignUp"));
+const GallerSlider = lazy(() => import("../components/GallerySlider"));
 const Home = () => {
   return (
-    <div>
-        <Navbar />
+    <Suspense fallback={<Loader />}>
+       <div className=' overflow-x-hidden'>
+       <Navbar />
         <ImgSlider />
-        <Cards />
+        <InfoGrid />
         <Gallery />
         <Services />
         <OurRooms />
-    </div>
+        <SignUp />
+        <GallerSlider />
+        <Footer />
+       </div>
+    </Suspense>
   )
 }
 
