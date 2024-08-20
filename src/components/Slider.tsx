@@ -51,10 +51,10 @@ const ImgSlider = () => {
           initial={{opacity: 0, x: -200}}
           whileInView={{opacity:1, x:0}}
           transition={{duration: 1, delay: 0.3}}
-          className="flex flex-col items-center justify-center gap-8 uppercase">
+          className="flex flex-col items-center justify-center gap-8 uppercase ml-16">
             <h1 className=" text-yellow-400 text-xl tracking-wider ">{data[0].heading}</h1>
-            <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">A special place where <br /> you can stay and relax</p>
-            <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
+            <p className=" text-[3rem] sm:text-[2rem] text-white tracking-[0.03rem] leading-tight text-wrap">A special place where <br /> you can stay and relax</p>
+            <Link to={"#"} className=" py-4 sm:py-3 sm:text-base flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
             </motion.div>
         )}
         {
@@ -63,10 +63,10 @@ const ImgSlider = () => {
             initial={{opacity: 0, x: -200}}
             whileInView={{opacity:1, x:0}}
             transition={{duration: 1, delay: 0.3}}
-             className="flex flex-col items-center justify-center gap-8 uppercase -ml-8">
+             className="flex flex-col items-center justify-center gap-8 uppercase -ml-0">
             <h1 className=" text-yellow-400 text-xl tracking-wider">{data[1].heading}</h1>
-            <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">We provide comfortable <br /> accommodation for you</p>
-            <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
+            <p className=" text-[3rem] sm:text-[2rem] text-white tracking-[0.03rem] leading-tight text-wrap">We provide comfortable <br /> accommodation for you</p>
+            <Link to={"#"} className=" py-4 sm:py-3 sm:text-base flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
             </motion.div>
             
         )}
@@ -76,10 +76,10 @@ const ImgSlider = () => {
       initial={{opacity: 0, x: -200}}
       whileInView={{opacity:1, x:0}}
       transition={{duration: 1, delay: 0.3}}
-            className="flex flex-col items-center justify-center gap-8 uppercase -ml-16">
+            className="flex flex-col items-center justify-center gap-8 uppercase -ml-8">
             <h1 className=" text-yellow-400 text-xl tracking-wider">{data[2].heading}</h1>
-            <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap">Take advantage of the budget <br /> oriented accommodation</p>
-              <Link to={"#"} className=" py-4 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
+            <p className=" text-[3rem] sm:text-[2rem] text-white tracking-[0.03rem] leading-tight text-wrap">Take advantage of the budget <br /> oriented accommodation</p>
+              <Link to={"#"} className=" py-4 sm:py-3 sm:text-base flex items-center justify-center bg-yellow-500 w-44 text-xl  tracking-wider text-gray-900">Book Now</Link>
               </motion.div>
         )}
       </div>

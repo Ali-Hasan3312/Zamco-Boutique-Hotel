@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaSearchPlus } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import ImageModal from './ImageModal';
 
 interface GalleryPropsTypes{
     image: string;
@@ -10,10 +11,20 @@ interface GalleryPropsTypes{
 }
 const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
     const [isHovered, setIsHovered] = useState(false)
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [ImageUrl, setImageUrl] = useState<string>("");
+    const openModal = (imageUrl: string) => {
+      setImageUrl(imageUrl);
+      setModalOpen(true);
+    };
+  
+    const closeModal = () => {
+      setModalOpen(false);
+    };
   return (
     <motion.div
           
-          className={`h-[300px] w-[300px] relative`}
+          className={`ImageOpen h-[300px] w-[300px] relative`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           initial= {{opacity: 0, scale: 0.5}}
@@ -25,6 +36,7 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
             src={image}
             className={`h-full w-full transition-transform duration-300 ease-in-out ${isHovered ? "scale-90" : ""}`}
             alt=""
+            onClick={()=>openModal(image)}
           />
           {isHovered && (
             <div className='absolute h-[250px] w-[250px] flex items-center justify-center top-6 left-6 border border-gray-400'>
@@ -34,6 +46,9 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
               </div>
             </div>
           )}
+           {modalOpen && (
+        <ImageModal imageUrl={ImageUrl} onClose={closeModal} />
+      )}
         </motion.div>
   )
 }

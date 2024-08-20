@@ -27,7 +27,7 @@ const Gallery = () => {
             <Link to={"#"} className=' text-gray-400 tracking-wide uppercase hover:text-custom-yellow hover:transition-all hover:duration-300'>Dining rooms</Link>
         </div>
        </div>
-       <div className='grid grid-cols-4 gap-3 mt-10 ml-6'>
+       <div className='grid grid-cols-4 gap-3 mt-10 ml-8'>
        <GalleryProps to='#' image={image1} room={1}  />
        <GalleryProps to='#' image={image2} room={2} />
        <GalleryProps to='#' image={image3} room={3} />

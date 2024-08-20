@@ -62,13 +62,13 @@ const Navbar = () => {
 
   return (
     <div className="">
-      <div className=" h-24 w-full flex py-2 items-center justify-between px-32">
+      <div className=" h-36 w-full flex py-2 items-center justify-between px-32 sm:px-4">
         <div>
-          <div className="h-16 w-28 text-4xl cursor-pointer tracking-wide text-gray-800 flex items-center text-nowrap gap-4">
-            <img src={logo} alt="" />
+          <div className="h-16 w-44 text-4xl cursor-pointer tracking-wide text-gray-800 flex items-center text-nowrap gap-4">
+            <img src={logo} className=" object-cover" alt="" />
           </div>
         </div>
-        <div className="flex items-center text-xl tracking-wide gap-16">
+        <div className="flex items-center text-xl max-sm:text-base text-nowrap tracking-wide gap-16">
           <div className="flex items-center gap-1">
             <IoCall className="text-yellow-500 opacity-70" />
             <span>+1 212 555 6688</span>
