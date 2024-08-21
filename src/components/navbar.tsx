@@ -48,27 +48,19 @@ const NavItem = ({ to, children, menuItems }:NavItemProps) => {
   );
 };
 const Navbar = () => {
-  const roomsMenu = [
-    { label: "Room 1", to: "/room1" },
-    { label: "Room 2", to: "/room2" },
-    { label: "Room 3", to: "/room3" },
-  ];
-  const aboutMenu = [
-    { label: "Amenities & Services", to: "#" },
-    { label: "Dinning", to: "#" },
-    { label: "Wellness", to: "#" },
-    { label: "Local Activities", to: "#" },
-  ]
+  
+  
+ 
 
   return (
     <div className="">
-      <div className=" h-36 w-full flex py-2 items-center justify-between px-32 sm:px-4">
+      <div className=" h-36 w-full flex py-2 items-center justify-between px-32 max-sm:px-2 max-sm:h-24">
         <div>
-          <div className="h-16 w-44 text-4xl cursor-pointer tracking-wide text-gray-800 flex items-center text-nowrap gap-4">
+          <div className="h-16 w-44 text-4xl max-sm:h-8 max-sm:w-20 max-sm:text-lg max-sm:gap-2 cursor-pointer tracking-wide text-gray-800 flex items-center text-nowrap gap-4">
             <img src={logo} className=" object-cover" alt="" />
           </div>
         </div>
-        <div className="flex items-center text-xl max-sm:text-base text-nowrap tracking-wide gap-16">
+        <div className="flex items-center text-xl text-nowrap tracking-wide gap-16 max-sm:gap-3 max-sm:text-sm">
           <div className="flex items-center gap-1">
             <IoCall className="text-yellow-500 opacity-70" />
             <span>+1 212 555 6688</span>
@@ -78,25 +70,31 @@ const Navbar = () => {
             <p className="font-normal">+1 212 555 6699</p>
           </div>
           <div className="">
-            <button className="h-12 w-32 border-[3px] text-lg tracking-wider hover:bg-yellow-300 hover:transition-all duration-300 hover:text-white border-black text-nowrap">
+            <Link to={"#"} className="h-12 w-32 py-2 px-4 max-sm:py-1 max-sm:px-1 max-sm:border max-sm:text-sm border-[3px] text-lg tracking-wider hover:bg-yellow-300 hover:transition-all duration-300 hover:text-white border-black text-nowrap">
               Book Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>
-      <nav className="sticky top-0 z-50 h-16 w-full bg-custom-nav text-white text-xl flex items-center justify-between px-16 tracking-wider">
-        <div className="flex items-center gap-12">
+      <nav className="sticky top-0 z-50 h-16 w-full max-sm:text-sm max-sm:px-4 max-sm:text-nowrap bg-custom-nav text-white text-xl flex items-center justify-between px-16 tracking-wider">
+        <div className="flex items-center gap-12 max-sm:gap-4">
           <NavItem to="/">Home</NavItem>
-          <NavItem to="#" menuItems={aboutMenu} >About Us</NavItem>
-          <NavItem to="#" menuItems={roomsMenu} >Rooms</NavItem>
-          <NavItem to="#">Contact us</NavItem>
-         
+          <NavItem to="/rooms" >Rooms</NavItem>
+          <NavItem to="/contact">Contact us</NavItem>
+          <NavItem to="/services">Amenities & Services</NavItem>
+          
         </div>
-        <div className="flex items-center gap-8">
-          <FaFacebookF className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />
+        <div className="flex items-center gap-8 max-sm:gap-4">
+          <Link to={"https://www.facebook.com"}><FaFacebookF className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" /></Link>
+          <Link to={"https://www.twitter.com"}>
           <FaTwitter className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />
-          <IoLogoGoogleplus className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300 text-2xl" />
+          </Link>
+          <Link to={"https://www.google.com"}>
+          <IoLogoGoogleplus className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300 text-2xl max-sm:text-lg" />
+          </Link>
+          <Link to={"https://www.instagram.com"}>
           <FiInstagram className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />
+          </Link>
         </div>
       </nav>
     </div>

@@ -2,29 +2,27 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaSearchPlus } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import ImageModal from './ImageModal';
 
 interface GalleryPropsTypes{
     image: string;
     to: string;
-    room:number;
+    room:string;
 }
 const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
     const [isHovered, setIsHovered] = useState(false)
-    const [modalOpen, setModalOpen] = useState<boolean>(false);
-    const [ImageUrl, setImageUrl] = useState<string>("");
-    const openModal = (imageUrl: string) => {
-      setImageUrl(imageUrl);
-      setModalOpen(true);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const openModal = () => {
+      setIsOpen(true);
+      console.log("Modal is true");
+      
     };
+    const closeModal = () => setIsOpen(false);
   
-    const closeModal = () => {
-      setModalOpen(false);
-    };
   return (
     <motion.div
           
-          className={`ImageOpen h-[300px] w-[300px] relative`}
+          className={`ImageOpen h-[300px] w-[300px] relative mx-auto`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           initial= {{opacity: 0, scale: 0.5}}
@@ -34,20 +32,25 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
         >
           <img
             src={image}
-            className={`h-full w-full transition-transform duration-300 ease-in-out ${isHovered ? "scale-90" : ""}`}
+            className={`h-full w-full hover:opacity-70 object-cover transition-transform duration-300 ease-in-out ${isHovered ? "scale-90" : ""}`}
             alt=""
-            onClick={()=>openModal(image)}
+            
           />
           {isHovered && (
-            <div className='absolute h-[250px] w-[250px] flex items-center justify-center top-6 left-6 border border-gray-400'>
+            <div className='absolute h-[250px] w-[250px] flex items-center justify-center top-6 left-6 border border-gray-400'
+            onClick={openModal}
+            >
               <div className='flex flex-col items-center justify-center transition-all duration-300 ease-out hover:text-custom-yellow text-2xl text-white'>
                 <FaSearchPlus />
-                <Link to={to} className='uppercase font-semibold '>{`Room 0${room}`}</Link>
+                <Link to={to} className='uppercase font-semibold '>{room}</Link>
               </div>
             </div>
           )}
-           {modalOpen && (
-        <ImageModal imageUrl={ImageUrl} onClose={closeModal} />
+{isOpen && (
+        <div className="modal" onClick={closeModal}>
+          <span className="close">&times;</span>
+          <img src={image} alt={`Room ${room}`} className="modal-content" />
+        </div>
       )}
         </motion.div>
   )
