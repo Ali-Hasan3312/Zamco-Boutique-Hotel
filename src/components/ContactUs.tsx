@@ -1,15 +1,12 @@
 
-const ContactUs = () => {
-  // const aboutRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   if (triggerScroll && aboutRef.current) {
-  //     aboutRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // }, []);
+
+const ContactUs = () => {
+  
+  
   return (
     
-    <div  className="isolate bg-gray-100 px-6 mt-16 py-8 lg:px-8">
+    <div id="contact"  className="isolate bg-gray-100 px-6 mt-16 py-8 lg:px-8">
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true"

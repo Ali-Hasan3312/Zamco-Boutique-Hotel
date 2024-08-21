@@ -14,7 +14,7 @@ const ServicesProps = ({icon, title, description}:ServiceTypes) => {
     
         
     
-    <div className="flex flex-col items-center justify-center h-[200px] w-[200px] text-center gap-2 mt-8"
+    <div className="flex flex-col items-center justify-center h-[200px] w-[200px] mx-auto text-center gap-2 mt-8"
      onMouseEnter={() => setIsHovered(true)}
      onMouseLeave={() => setIsHovered(false)}
      

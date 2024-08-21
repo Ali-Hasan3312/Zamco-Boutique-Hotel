@@ -1,5 +1,5 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { lazy, Suspense } from 'react'
+import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react'
 import './App.css';
 import Home from './pages/Home';
 import Footer from './components/Footer';
@@ -14,11 +14,26 @@ const SignUp = lazy(() => import("./components/SignUp"));
 const Contact = lazy(() => import("./components/ContactUs"));
 
 function App() {
+  function ScrollToTop() {
+    const { hash } = useLocation();
+  
+    React.useEffect(() => {
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }, [hash]);
+  
+    return null;
+  }
 
   return (
     <Router>
       <Navbar />
       <ImgSlider />
+      <ScrollToTop />
       <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<Home />} />

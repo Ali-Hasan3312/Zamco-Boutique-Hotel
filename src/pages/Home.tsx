@@ -12,7 +12,7 @@ const GallerSlider = lazy(() => import("../components/GallerySlider"));
 const Home = () => {
   return (
     <Suspense fallback={<Loader />}>
-       <div className=' overflow-x-hidden'>
+       <div id='home' className='overflow-x-hidden'>
       
        
         <InfoGrid />

@@ -1,18 +1,21 @@
+import { useState } from "react";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import { IoLogoGoogleplus } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import logo from "../assets/Zamco_logo.jpg";
-import { useState } from "react";
-
 interface NavItemProps{
   to: string;
   children: React.ReactNode;
   menuItems?: { label: string; to: string }[];
+  scrollTo?:  ()=> void 
+  
+
 }
-const NavItem = ({ to, children, menuItems }:NavItemProps) => {
+const NavItem = ({ to, children, menuItems, scrollTo }:NavItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
+ 
 
   return (
     <div
@@ -38,6 +41,7 @@ const NavItem = ({ to, children, menuItems }:NavItemProps) => {
               key={index}
               to={item.to}
               className="block px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
+              onClick={() => scrollTo}
             >
               {item.label}
             </Link>
@@ -49,7 +53,7 @@ const NavItem = ({ to, children, menuItems }:NavItemProps) => {
 };
 const Navbar = () => {
   
-  
+ 
  
 
   return (
@@ -78,10 +82,10 @@ const Navbar = () => {
       </div>
       <nav className="sticky top-0 z-50 h-16 w-full max-sm:text-sm max-sm:px-4 max-sm:text-nowrap bg-custom-nav text-white text-xl flex items-center justify-between px-16 tracking-wider">
         <div className="flex items-center gap-12 max-sm:gap-4">
-          <NavItem to="/">Home</NavItem>
-          <NavItem to="/rooms" >Rooms</NavItem>
-          <NavItem to="/contact">Contact us</NavItem>
-          <NavItem to="/services">Amenities & Services</NavItem>
+          <NavItem  to="/">Home</NavItem>
+          <NavItem  to="/rooms#rooms" >Rooms</NavItem>
+          <NavItem to="/contact#contact">Contact us</NavItem>
+          <NavItem to="/services#services">Amenities & Services</NavItem>
           
         </div>
         <div className="flex items-center gap-8 max-sm:gap-4">

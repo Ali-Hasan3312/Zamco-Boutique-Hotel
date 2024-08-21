@@ -22,7 +22,7 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
   return (
     <motion.div
           
-          className={`ImageOpen h-[300px] w-[300px] relative mx-auto`}
+          className={`ImageOpen h-[400px] w-[23vw] max-sm:w-[70vw] relative mx-auto`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           initial= {{opacity: 0, scale: 0.5}}
@@ -37,7 +37,7 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
             
           />
           {isHovered && (
-            <div className='absolute h-[250px] w-[250px] flex items-center justify-center top-6 left-6 border border-gray-400'
+            <div className='absolute h-[330px] w-[19vw] max-sm:w-[60vw] flex items-center justify-center top-8 left-6 border border-gray-400'
             onClick={openModal}
             >
               <div className='flex flex-col items-center justify-center transition-all duration-300 ease-out hover:text-custom-yellow text-2xl text-white'>

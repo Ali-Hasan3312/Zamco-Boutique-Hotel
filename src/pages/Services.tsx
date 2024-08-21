@@ -11,9 +11,9 @@ import { FadeUp } from "../utils/animation";
 const Services = () => {
     
   return (
-    <div className="mt-24">
+    <div id="services" className="mt-24">
         <h1 className=" text-2xl tracking-wide font-medium uppercase text-center">What we offer</h1>
-        <motion.div className=" grid grid-cols-4 max-sm:grid-cols-2 max-sm:ml-8 gap-2 mt-10 ml-20"
+        <motion.div className=" grid grid-cols-4 max-sm:grid-cols-2 gap-2 mt-10"
         variants={FadeUp(0.3)}
         initial="hidden"
         whileInView={"visible"}

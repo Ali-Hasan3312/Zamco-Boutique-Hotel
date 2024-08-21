@@ -56,7 +56,7 @@ const Gallery = () => {
             <Link to={"#"} className={`tracking-wide uppercase hover:text-custom-yellow hover:transition-all hover:duration-300 ${dinningRooms? "text-custom-yellow" : "text-gray-400"}`} onClick={dinningRoomHandler}>Dining rooms</Link>
         </div>
        </div>
-       <div className='grid grid-cols-4 gap-3 mt-10 ml-8 max-sm:grid-cols-1 max-sm:px-16'>
+       <div className='grid grid-cols-4 gap-3 mt-10 ml-8 max-sm:ml-0 max-sm:grid-cols-1 max-sm:px-16'>
        {all && (
       <>
        <GalleryProps to='#' image={Gallery1} room={"Gallery1"}  />

@@ -63,8 +63,10 @@ const GallerySlider: React.FC = () => {
         setSlidesToShow(1);
       } else if (window.innerWidth < 1024) {
         setSlidesToShow(2);
-      } else {
+      } else if(window.innerWidth < 1550){
         setSlidesToShow(3);
+      } else{
+        setSlidesToShow(4)
       }
     };
 

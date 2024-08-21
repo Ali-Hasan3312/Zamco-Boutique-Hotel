@@ -12,7 +12,7 @@ const OurRooms = () => {
     
 
   return (
-    <div className='mt-16'>
+    <div id="rooms" className='mt-16'>
         <h1 className=' text-2xl text-center font-medium tracking-wide uppercase'>our rooms</h1>
        <OurRoomProps roomImage={room5} price='69' roomType='Triple Room ' description='This room has three single beds, en-suite bathrooms, and card entry systems. It can be rented individually or for a company of three guests.' reviews='5 customer reviews' to='#' />
        <OurRoomProps roomImage={livingRoom3} price='20' roomType='Single Room ' description='This room has one single bed, en-suite bathroom, and card entry system. It can be rented individually or for a company of two guests.' reviews='5 customer reviews' to='#' />
