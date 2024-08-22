@@ -6,6 +6,9 @@ import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import { IoLogoGoogleplus } from "react-icons/io";
 const Footer = () => {
+    function scrollToSection(id:string) {
+        document.getElementById(id)!.scrollIntoView({ behavior: 'smooth' });
+      }
   return (
    <div>
      <div className='h-[350px] w-full bg-zinc-700 mt-16'>
@@ -22,7 +25,7 @@ const Footer = () => {
                 </div>
                 <div className='flex items-center gap-3'>
                     <FaLocationArrow className=' text-2xl text-custom-yellow max-sm:text-base'/>
-                    <Link to={"#"} className='text-base text-white hover:text-custom-yellow max-sm:text-sm'>4730 Crystal Springs Dr, <br /> Los Angeles, CA 90027</Link>
+                    <Link to={"https://g.co/kgs/Y9cgy1y"} className='text-base text-white hover:text-custom-yellow max-sm:text-sm'> Old City, Sabir str. 23, near Baki 1001, Azerbaijan <br /> </Link>
                 </div>
             </div>
             <div className='flex flex-col gap-6 mt-12'>
@@ -49,15 +52,15 @@ const Footer = () => {
                     </div>
                     <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
                         <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
-                        <Link to={"#"} className='text-white'>Blog</Link>
+                        <Link to={"/services#services"} onClick={()=> scrollToSection("services")} className='text-white'>Our Services</Link>
                     </div>
                     <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
                         <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
-                        <Link to={"#"} className='text-white'>Our Rooms</Link>
+                        <Link to={"/rooms#rooms"} onClick={()=> scrollToSection("rooms")} className='text-white'>Our Rooms</Link>
                     </div>
                     <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
                         <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
-                        <Link to={"#"} className='text-white'>Gallery</Link>
+                        <Link to={"/gallery#gallery"} onClick={()=> scrollToSection("gallery")} className='text-white'>Gallery</Link>
                     </div>
                     <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
                         <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>

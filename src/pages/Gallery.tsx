@@ -43,7 +43,7 @@ const Gallery = () => {
     setAll(false);
   }
   return (
-    <div className=' mt-12'>
+    <div className=' mt-12' id='gallery'>
        <div className='flex flex-col font-semibold gap-2 items-center justify-center'>
        <h1 className=' text-center text-2xl max-sm:text-xl'>Our Gallery</h1>
         <div className='flex items-center justify-center gap-8 text-sm max-sm:text-[12px] mt-2 max-sm:px-2 max-sm:gap-4 text-nowrap'>

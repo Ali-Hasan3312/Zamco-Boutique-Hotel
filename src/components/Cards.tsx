@@ -6,8 +6,9 @@ interface InfoCardProps {
     icon: React.ReactNode;
     title: string;
     description: string;
+    to?: string 
   }
-export const  InfoCard = ({ icon, title, description }:InfoCardProps) => {
+export const  InfoCard = ({ icon, title, description, to }:InfoCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -23,7 +24,7 @@ export const  InfoCard = ({ icon, title, description }:InfoCardProps) => {
       <div className="hexagon w-24 h-16 font-normal bg-custom-yellow flex items-center opacity-70 justify-center">
         {icon}
       </div>
-      <Link to={"#"} className={`uppercase text-lg font-bold text-black ${isHovered ? "tracking-[0.1rem] transition-all ease-in-out duration-500 text-custom-yellow cursor-pointer" : ""}`}>
+      <Link to={to!} className={`uppercase text-lg font-bold text-black ${isHovered ? "tracking-[0.1rem] transition-all ease-in-out duration-500 text-custom-yellow cursor-pointer" : ""}`}>
         {title}
       </Link >
       <div className={`border  ${isHovered ? "border-custom-yellow w-32 transition-all ease-in-out duration-800" : "w-20 border-gray-300"}`}></div>
