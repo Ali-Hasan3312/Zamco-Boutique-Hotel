@@ -9,16 +9,19 @@ const InfoGrid = () => {
         <InfoCard 
           icon={<IoMapOutline className="text-[50px]" />}
           title="Map & Directions"
+          to='https://g.co/kgs/Y9cgy1y'
           description="Our hostel is located in the downtown and not too far from airport and bus station so it is quite easy to find us wherever you come from."
         />
         <InfoCard 
           icon={<LiaHomeSolid className="text-[50px]" />}
           title="Accommodation services"
-          description="Visit Hostel provides high-quality accommodation services to clients that come to our city from all over the world throughout the year."
+          to='/services'
+          description="Zamco Hostel provides high-quality accommodation services to clients that come to our city from all over the world throughout the year."
         />
         <InfoCard 
           icon={<FaRegStar className="text-[50px]" />}
           title="Great Experience"
+          to='#'
           description="With qualified and friendly staff and high level of comfort, we are sure you will have a great experience of staying at the Visit Hostel."
         />
       </div>
