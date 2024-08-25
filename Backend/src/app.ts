@@ -9,6 +9,7 @@ import cron from 'node-cron';
 import { Booking } from "./models/booking";
 import bookingRouter from "./routes/bookingRoute";
 import contactRouter from "./routes/contact.route";
+import getInTouchRouter from "./routes/getinTouchRoute";
 const app = express()
 dotenv.config({path: "./config/config.env"})
 
@@ -16,29 +17,33 @@ const port = process.env.PORT || 3000;
 connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-cron.schedule('* * * * * *', async () => {  // This will run every second
-  try {
-      const currentDate = new Date();
+// cron.schedule('* * * * * *', async () => {  // This will run every second
+//   try {
+//       const currentDate = new Date();
       
-      // Find all bookings where the checkout date is less than the current date
-      const expiredBookings = await Booking.find({
-          checkOut: { $gt: currentDate },
-      });
+//       // Find all bookings where the checkout date is less than the current date
+//       const expiredBookings = await Booking.find({
+//           checkOut: { $lt: currentDate },
+//       });
+      
+      
+      
+//       // Update the room status for each expired booking
 
-      // Update room status for each expired booking
-      for (const booking of expiredBookings) {
-          const room = await Room.findById(booking.room);
-          if (room) {
-              room.roomStatus = true;
-              await room.save();
-          }
-      }
+//       // Update room status for each expired booking
+//       for (const booking of expiredBookings) {
+//           const room = await Room.findById(booking.room);
+//           if (room) {
+//               room.roomStatus = true;
+//               await room.save();
+//           }
+//       }
 
-      console.log('Successfully updated room status for expired bookings.');
-  } catch (error) {
-      console.error('Error updating room status:', error);
-  }
-});
+      
+//   } catch (error) {
+//       console.error('Error updating room status:', error);
+//   }
+// });
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
@@ -50,5 +55,6 @@ app.listen(port,()=>{
 app.use("/api/v1",roomsRouter)
 app.use("/api/v1",bookingRouter)
 app.use("/api/v1",contactRouter)
+app.use("/api/v1",getInTouchRouter)
 
 app.use(errorMiddleware)
