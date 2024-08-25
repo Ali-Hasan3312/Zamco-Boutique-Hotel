@@ -5,6 +5,8 @@ import { IoMdMail } from "react-icons/io";
 import { MdCall } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
+import toast from "react-hot-toast";
+import axios from "axios";
 interface FooterProps {
     onScrollToContact: () => void;
     onScrollToGallery: () => void;
@@ -14,12 +16,53 @@ interface FooterProps {
   }
 const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterProps) => {
     const [showPopup, setShowPopup] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phoneNumber: "",
+       
+      });
+      console.log(formData);
+      const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      };
     const handleButtonClick = () => {
         setShowPopup(true);
       };
-    
       const handleClosePopup = () => {
         setShowPopup(false);
+      };
+    
+      const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+    
+       
+    
+        try {
+          const response = await axios.post("http://localhost:4000/api/v1/touch", {
+            name: formData.name,
+            email: formData.email,
+            phoneNumber: formData.phoneNumber,
+          });
+          
+          
+    
+          if (response.data) {
+            toast.success("Message sent successfully!");
+            // Reset form after successful submission
+            setFormData({
+              name: "",
+              email: "",
+              phoneNumber: "",
+             
+            });
+            setShowPopup(false);
+           
+          }
+        } catch (error:any) {
+          console.error("Error sending message:", error);
+          toast.error(error.response?.data?.message || "Message could not sent. Please try again.");
+        }
       };
   return (
    <div>
@@ -111,18 +154,30 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
            <div className="flex flex-col items-center justify-center w-full ml-8">
            <div className="flex flex-col px-2 gap-2 w-full">
            <label className=" text-black font-semibold">Full Name</label>
-           <input type="text" className=" w-[80%] py-2 px-2" />
+           <input type="text"
+           name="name"
+           value={formData.name}
+           onChange={handleChange}
+           className=" w-[80%] py-2 px-2" />
            </div>
            <div className="flex flex-col px-2 gap-2 w-full">
            <label className=" text-black font-semibold">Email</label>
-           <input type="email" className=" w-[80%] py-2 px-2" />
+           <input type="email"
+           name="email"
+           value={formData.email}
+           onChange={handleChange}
+           className=" w-[80%] py-2 px-2" />
            </div>
            <div className="flex flex-col px-2 gap-2 w-full">
            <label className=" text-black font-semibold">Contact</label>
-           <input type="text" className=" w-[80%] py-2 px-2" />
+           <input type="text"
+           name="phoneNumber"
+           value={formData.phoneNumber}
+           onChange={handleChange}
+           className=" w-[80%] py-2 px-2" />
            </div>
            </div>
-            <button onClick={handleClosePopup} className="bg-gray-500 absolute bottom-28 left-36 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <button onClick={handleSubmit} className="bg-gray-500 absolute bottom-28 left-36 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
               Submit
             </button>
           </motion.div>

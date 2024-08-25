@@ -24,7 +24,7 @@ const OurRoomProps = ({
 }:OurRoomPropsTypes) => {
     const [isHovered, setIsHovered] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
-    const {checkOut} = useContext(Context)
+    const {checkOut, setbookButton} = useContext(Context)
     
     
     const [formData, setFormData] = useState({
@@ -37,10 +37,12 @@ const OurRoomProps = ({
    
     const handleButtonClick = () => {
         setShowPopup(true);
+        setbookButton(false)
       };
-    
+      
       const handleClosePopup = () => {
         setShowPopup(false);
+        
       };
       const handleChange = (e:any) => {
         setFormData({
@@ -67,7 +69,8 @@ const OurRoomProps = ({
       
           if (response.data.success) {
             toast.success("Room booked successfully!");
-            handleClosePopup(); // Close the popup after successful submission
+            handleClosePopup();
+            setbookButton(true) // Close the popup after successful submission
           }
         } catch (error:any) {
           toast.error(error.response?.data?.message || "Booking failed. Please try again.");
