@@ -1,17 +1,20 @@
+import { motion } from "framer-motion";
+import { forwardRef } from "react";
 import { BsCupHot, BsPlug } from "react-icons/bs";
 import { FaShower } from "react-icons/fa";
 import { FaWifi } from "react-icons/fa6";
 import { MdLocalLaundryService, MdOutlineLockOpen } from "react-icons/md";
 import { TbAirConditioning, TbToolsKitchen2 } from "react-icons/tb";
 import ServicesProps from "../components/ServicesProps";
-import { motion } from "framer-motion";
 import { FadeUp } from "../utils/animation";
 
-
-const Services = () => {
-    
+interface servicesProps extends React.HTMLAttributes<HTMLDivElement> {}
+const Services = forwardRef<HTMLDivElement, servicesProps>((props, ref) => {
+  props
+  
+  
   return (
-    <div id="services" className="mt-24">
+    <div ref={ref} id="services" className="mt-24">
         <h1 className=" text-2xl tracking-wide font-medium uppercase text-center">What we offer</h1>
         <motion.div className=" grid grid-cols-4 max-sm:grid-cols-2 gap-2 mt-10"
         variants={FadeUp(0.3)}
@@ -61,6 +64,6 @@ const Services = () => {
         </motion.div>
     </div>
   )
-}
+})
 
 export default Services

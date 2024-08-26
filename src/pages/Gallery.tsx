@@ -1,8 +1,9 @@
+import { forwardRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Gallery1 from "../assets/Our Gallery/Gallery1.jpg"
-import Gallery2 from "../assets/Our Gallery/Gallery2.jpg"
 import DinningRoom1 from "../assets/Our Gallery/DinningRoom1.jpg"
 import DinningRoom2 from "../assets/Our Gallery/DinningRoom2.jpg"
+import Gallery1 from "../assets/Our Gallery/Gallery1.jpg"
+import Gallery2 from "../assets/Our Gallery/Gallery2.jpg"
 import BedRoom1 from "../assets/Our Gallery/Room1.jpg"
 import BedRoom2 from "../assets/Our Gallery/Room2.jpg"
 import BedRoom3 from "../assets/Our Gallery/Room3.jpg"
@@ -12,8 +13,9 @@ import LivingRoom1 from "../assets/Our Gallery/livingRoom1.jpg"
 import LivingRoom2 from "../assets/Our Gallery/livingRoom2.jpg"
 import LivingRoom3 from "../assets/Our Gallery/livingRoom3.jpg"
 import GalleryProps from '../components/GalleryProps'
-import { useState } from 'react'
-const Gallery = () => {
+interface GalleryProps extends React.HTMLAttributes<HTMLDivElement> {}
+const Gallery = forwardRef<HTMLDivElement, GalleryProps>((props, ref) => {
+  props
   const [all, setAll] = useState(true)
   const [bedrooms, setBedrooms] = useState(false)
   const [livingrooms, setLivingRooms] = useState(false)
@@ -42,8 +44,12 @@ const Gallery = () => {
     setDinningRooms(true);
     setAll(false);
   }
+  
+  
+ 
   return (
-    <div className=' mt-12' id='gallery'>
+
+    <div ref={ref} className=' mt-12' id='gallery'>
        <div className='flex flex-col font-semibold gap-2 items-center justify-center'>
        <h1 className=' text-center text-2xl max-sm:text-xl'>Our Gallery</h1>
         <div className='flex items-center justify-center gap-8 text-sm max-sm:text-[12px] mt-2 max-sm:px-2 max-sm:gap-4 text-nowrap'>
@@ -104,6 +110,6 @@ const Gallery = () => {
     </div>
     </div>
   )
-}
+})
 
 export default Gallery

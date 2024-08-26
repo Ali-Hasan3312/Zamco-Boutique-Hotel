@@ -1,7 +1,35 @@
 import { motion } from "framer-motion"
 import discountimage from "../assets/DiscountOffer.jpg"
 import { FadeUp } from "../utils/animation"
+import { useState } from "react"
+import axios from "axios"
+import toast from "react-hot-toast"
 const SignUp = () => {
+  const [email, setEmail] = useState('')
+  
+  const submitHandler = async(e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post("http://localhost:4000/api/v1/subscribe", {
+        
+        email,
+        
+      });
+      
+      
+
+      if (response.data) {
+        toast.success(response.data.message);
+        // Reset form after successful submission
+        setEmail('')
+       
+      }
+    } catch (error:any) {
+     
+      toast.error(error.response?.data?.message || "Could not subscribed. Please try again.");
+    }
+
+  }
   return (
     <div className="h-[400px] w-full relative mt-12">
         <img className="h-full w-full object-cover" src={discountimage} alt="" />
@@ -21,11 +49,15 @@ const SignUp = () => {
        initial={{opacity: 0, x: -100}}
        whileInView={{opacity:1, x:0}}
        transition={{duration: 1, delay: 0.3}}
-       type="text" placeholder="Enter Your E-mail" className="h-16 w-72 max-sm:h-10 max-sm:w-48 max-sm:text-sm bg-black/50 outline-none placeholder:text-white px-4" />
+       type="text"
+       value={email} onChange={(e) => setEmail(e.target.value)}
+       name="email"
+       placeholder="Enter Your E-mail" className="h-16 w-72 max-sm:h-10 max-sm:w-48 max-sm:text-sm bg-black/50 outline-none placeholder:text-white px-4" />
        <motion.button
        initial={{opacity: 0, x: 100}}
        whileInView={{opacity:1, x:0}}
        transition={{duration: 1, delay: 0.3}}
+       onClick={submitHandler}
        className="h-16 w-32 bg-custom-yellow text-gray-600 max-sm:h-10 max-sm:w-20 max-sm:text-[12px]">Subscribe</motion.button>
        </div>
         </div>
