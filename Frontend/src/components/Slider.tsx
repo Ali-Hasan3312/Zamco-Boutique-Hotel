@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import '../App.css'; // Add this line to import your CSS
-import Background from "./Background";
 import { Context } from "../main";
+import Background from "./Background";
 interface dataProps {
   heading: string;
   p: string;
@@ -83,7 +82,7 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
           className="flex flex-col items-center justify-center gap-8 uppercase ml-16 max-sm:ml-0">
             <h1 className=" text-yellow-400 text-xl tracking-wider max-sm:text- max-sm:text-nowrap">{data[0].heading}</h1>
             <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap max-sm:text-[22px]">A special place where <br /> you can stay and relax</p>
-            <Link to={"#"} className=" py-4 max-sm:text-sm max-sm:py-2 max-sm:w-28 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
+            <button onClick={onScrollToRooms} className=" py-4 max-sm:text-sm max-sm:py-2 max-sm:w-28 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</button>
             </motion.div>
         )}
         {
@@ -95,7 +94,7 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
              className="flex flex-col items-center justify-center gap-8 uppercase -ml-0">
             <h1 className=" text-yellow-400 text-xl tracking-wider max-sm:text- max-sm:text-nowrap">{data[1].heading}</h1>
             <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap max-sm:text-[22px]">We provide comfortable <br /> accommodation for you</p>
-            <Link to={"#"} className=" py-4 max-sm:text-sm max-sm:py-2 max-sm:w-28 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</Link>
+            <button onClick={onScrollToRooms} className=" py-4 max-sm:text-sm max-sm:py-2 max-sm:w-28 flex items-center justify-center bg-yellow-500 w-44 text-xl tracking-wider text-gray-900">Book Now</button>
             </motion.div>
             
         )}
@@ -108,7 +107,7 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
             className="flex flex-col items-center justify-center gap-8 uppercase -ml-8">
             <h1 className=" text-yellow-400 text-xl tracking-wider max-sm:text- max-sm:text-nowrap">{data[2].heading}</h1>
             <p className=" text-[3rem] text-white tracking-[0.03rem] leading-tight text-wrap max-sm:text-[22px]">Take advantage of the budget <br /> oriented accommodation</p>
-              <Link to={"#"} className=" py-4 max-sm:text-sm max-sm:py-2 max-sm:w-28 flex items-center justify-center bg-yellow-500 w-44 text-xl  tracking-wider text-gray-900">Book Now</Link>
+              <button onClick={onScrollToRooms}  className=" py-4 max-sm:text-sm max-sm:py-2 max-sm:w-28 flex items-center justify-center bg-yellow-500 w-44 text-xl  tracking-wider text-gray-900">Book Now</button>
               </motion.div>
         )}
       </div>
