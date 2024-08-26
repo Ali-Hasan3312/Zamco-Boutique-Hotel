@@ -110,29 +110,11 @@ const Navbar  = ({ onScrollToContact,onScrollToGallery,onScrollToServices,onScro
           variants={FadeRight(0.2)}
         >
           <div className="flex flex-col items-center text-black gap-12 max-sm:gap-4">
-            <NavItem to="/" onClick={handleCloseMenu}>Home</NavItem>
-            <NavItem tagId="rooms" to="/rooms" 
-            onClick={()=>{
-              handleCloseMenu()
-              onScrollToRooms()
-            }}>
-              Rooms
-            </NavItem>
-            <NavItem
-              tagId="contact"
-              
-             
-              onClick={handleCloseMenu}
-            >
-              Contact us
-            </NavItem>
-            <NavItem
-              tagId="services"
-              to="/services"
-              onClick={handleCloseMenu}
-            >
-              Amenities & Services
-            </NavItem>
+          <NavItem>Home</NavItem>
+            <NavItem onClick={onScrollToRooms}>Rooms</NavItem>
+            <NavItem onClick={onScrollToServices}>Amenities & Services</NavItem>
+            <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
+            <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
           </div>
         </motion.aside>
       )}
