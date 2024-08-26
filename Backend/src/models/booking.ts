@@ -19,10 +19,15 @@ export interface Booking extends Document {
    email: {
     type: String,
     required: [true, "Email is required"],
-   },
+    unique: true,
+    trim: true,
+    lowercase: true, 
+},
    phoneNumber: {
     type: String,
     required: [true, "Phone Number is required"],
+    unique: true,
+    trim: true,
    },
     checkOut: {
         type: Date,
@@ -42,6 +47,6 @@ export interface Booking extends Document {
         ref: "Room",
         required: [true, "Room is required"]
     },
-  });
+  },{timestamps:true});
 
   export const Booking = model<Booking>("Booking", BookingSchema)

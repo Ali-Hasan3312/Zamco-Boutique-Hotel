@@ -10,14 +10,19 @@ const ContactSchema = new mongoose_1.Schema({
     email: {
         type: String,
         required: [true, "Email is required"],
+        unique: true,
+        trim: true,
+        lowercase: true,
     },
     phoneNumber: {
         type: String,
         required: [true, "Phone Number is required"],
+        unique: true,
+        trim: true,
     },
     userMessage: {
         type: String,
         required: [true, "Message is required"],
     },
-});
+}, { timestamps: true });
 exports.Contact = (0, mongoose_1.model)("Contact", ContactSchema);

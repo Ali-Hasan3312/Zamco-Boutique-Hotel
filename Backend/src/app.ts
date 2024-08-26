@@ -10,6 +10,7 @@ import { Booking } from "./models/booking";
 import bookingRouter from "./routes/bookingRoute";
 import contactRouter from "./routes/contact.route";
 import getInTouchRouter from "./routes/getinTouchRoute";
+import userSubscriptionRouter from "./routes/userSubscriptionRoute";
 const app = express()
 dotenv.config({path: "./config/config.env"})
 
@@ -56,5 +57,6 @@ app.use("/api/v1",roomsRouter)
 app.use("/api/v1",bookingRouter)
 app.use("/api/v1",contactRouter)
 app.use("/api/v1",getInTouchRouter)
+app.use("/api/v1",userSubscriptionRouter)
 
 app.use(errorMiddleware)

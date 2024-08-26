@@ -17,7 +17,7 @@ const RoomSchema = new mongoose_1.Schema({
     },
     roomReviews: {
         type: Number,
-        default: 0
+        default: 5
     },
     roomStatus: {
         type: Boolean,
@@ -27,5 +27,5 @@ const RoomSchema = new mongoose_1.Schema({
         type: String,
         required: [true, "Room photo is required"]
     }
-});
+}, { timestamps: true });
 exports.Room = (0, mongoose_1.model)("Room", RoomSchema);
