@@ -46,3 +46,7 @@
   text-decoration: none;
   cursor: pointer;
 }
+.slick-dots li.slick-active div {
+  background-color: black !important;
+}
+

@@ -1,21 +1,21 @@
-import React, { useRef, useState, useEffect } from 'react';
-import Slider, { Settings } from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaSearchPlus } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import Gallery1 from "../assets/Our Gallery/Gallery1.jpg"
-import Gallery2 from "../assets/Our Gallery/Gallery2.jpg"
-import DinningRoom1 from "../assets/Our Gallery/DinningRoom1.jpg"
-import DinningRoom2 from "../assets/Our Gallery/DinningRoom2.jpg"
-import BedRoom1 from "../assets/Our Gallery/Room1.jpg"
-import BedRoom2 from "../assets/Our Gallery/Room2.jpg"
-import BedRoom3 from "../assets/Our Gallery/Room3.jpg"
-import BedRoom4 from "../assets/Our Gallery/Room4.jpg"
-import BedRoom5 from "../assets/Our Gallery/Room5.jpg"
-import LivingRoom1 from "../assets/Our Gallery/livingRoom1.jpg"
-import LivingRoom2 from "../assets/Our Gallery/livingRoom2.jpg"
-import LivingRoom3 from "../assets/Our Gallery/livingRoom3.jpg"
+import Slider, { Settings } from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import DinningRoom1 from "../assets/Our Gallery/DinningRoom1.jpg";
+import DinningRoom2 from "../assets/Our Gallery/DinningRoom2.jpg";
+import Gallery1 from "../assets/Our Gallery/Gallery1.jpg";
+import Gallery2 from "../assets/Our Gallery/Gallery2.jpg";
+import BedRoom1 from "../assets/Our Gallery/Room1.jpg";
+import BedRoom2 from "../assets/Our Gallery/Room2.jpg";
+import BedRoom3 from "../assets/Our Gallery/Room3.jpg";
+import BedRoom4 from "../assets/Our Gallery/Room4.jpg";
+import BedRoom5 from "../assets/Our Gallery/Room5.jpg";
+import LivingRoom1 from "../assets/Our Gallery/livingRoom1.jpg";
+import LivingRoom2 from "../assets/Our Gallery/livingRoom2.jpg";
+import LivingRoom3 from "../assets/Our Gallery/livingRoom3.jpg";
 
 const GallerySlider: React.FC = () => {
   const sliderRef = useRef<Slider | null>(null);
@@ -29,12 +29,34 @@ const GallerySlider: React.FC = () => {
     slidesToScroll: 1,
     arrows: false,
     dots: true,
+    dotsClass: "slick-dots slick-thumb",
+  customPaging: function() {
+    return (
+      <div
+        style={{
+          width: "10px",
+          height: "10px",
+          border: "1px solid black",
+          borderRadius: "50%",
+          backgroundColor: "white",
+        }}
+      >
+      </div>
+    );
+  },
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true,
     appendDots: (dots: React.ReactNode) => (
-      <div style={{ position: 'absolute', bottom: '-30px', width: '100%' }}>
-        <ul style={{ margin: "0px" }}> {dots} </ul>
+      <div style={{ 
+        position: 'absolute', 
+        bottom: '-30px', 
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <ul style={{ margin: "0px", padding: "0px", listStyle: "none", display: "flex", gap: "5px" }}> {dots} </ul>
       </div>
     ),
   };
@@ -89,7 +111,7 @@ const GallerySlider: React.FC = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <img src={slide.image} className='h-full w-full object-cover' alt="" />
+                <img src={slide.image} className='h-full w-full max-sm:h-[90%] object-cover' alt="" />
                 {hoveredIndex === index && (
                   <div className='h-[85%] w-[85%] border border-gray-300 absolute transition-transform ease-in-out duration-300 text-white text-3xl top-4 left-4 flex items-center justify-center'>
                     <Link to={"#"} className='hover:text-custom-yellow'>
