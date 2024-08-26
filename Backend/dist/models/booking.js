@@ -10,10 +10,15 @@ const BookingSchema = new mongoose_1.Schema({
     email: {
         type: String,
         required: [true, "Email is required"],
+        unique: true,
+        trim: true,
+        lowercase: true,
     },
     phoneNumber: {
         type: String,
         required: [true, "Phone Number is required"],
+        unique: true,
+        trim: true,
     },
     checkOut: {
         type: Date,
@@ -32,5 +37,5 @@ const BookingSchema = new mongoose_1.Schema({
         ref: "Room",
         required: [true, "Room is required"]
     },
-});
+}, { timestamps: true });
 exports.Booking = (0, mongoose_1.model)("Booking", BookingSchema);

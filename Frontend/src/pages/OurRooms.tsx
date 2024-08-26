@@ -15,9 +15,9 @@ interface Room {
   photo: string; 
 }
 const OurRooms = forwardRef<HTMLDivElement, roomsProps>((props, ref) => {
-  console.log(props);
+  props
   const [rooms, setRooms] = useState<Room[]>([]);
-  const {checkOut} = useContext(Context)
+  const {bookButton} = useContext(Context)
 
   useEffect(() => {
     const fetchAllRooms = async () => {
@@ -37,10 +37,10 @@ const OurRooms = forwardRef<HTMLDivElement, roomsProps>((props, ref) => {
 
     
     fetchAllRooms(); 
-  }, [checkOut]); 
+  }, [bookButton]); 
 
   
-  console.log(rooms);
+  
   
   return (
     <div ref={ref} id="rooms" className="mt-16">

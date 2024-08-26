@@ -15,7 +15,7 @@ import LivingRoom3 from "../assets/Our Gallery/livingRoom3.jpg"
 import GalleryProps from '../components/GalleryProps'
 interface GalleryProps extends React.HTMLAttributes<HTMLDivElement> {}
 const Gallery = forwardRef<HTMLDivElement, GalleryProps>((props, ref) => {
-  console.log(props);
+  props
   const [all, setAll] = useState(true)
   const [bedrooms, setBedrooms] = useState(false)
   const [livingrooms, setLivingRooms] = useState(false)

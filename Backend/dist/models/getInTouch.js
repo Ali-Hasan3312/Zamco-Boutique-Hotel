@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Contact = void 0;
+exports.GetTouch = void 0;
 const mongoose_1 = require("mongoose");
 const ContactSchema = new mongoose_1.Schema({
     name: {
@@ -20,9 +20,5 @@ const ContactSchema = new mongoose_1.Schema({
         unique: true,
         trim: true,
     },
-    userMessage: {
-        type: String,
-        required: [true, "Message is required"],
-    },
 }, { timestamps: true });
-exports.Contact = (0, mongoose_1.model)("Contact", ContactSchema);
+exports.GetTouch = (0, mongoose_1.model)("GetTouch", ContactSchema);

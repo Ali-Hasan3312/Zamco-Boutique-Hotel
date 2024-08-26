@@ -9,6 +9,8 @@ interface ContextType {
   rooms: Number;
   adults: Number;
   children: Number;
+  bookButton: boolean;
+  setbookButton: (bookButton: boolean) => void;
   setrooms: (rooms: Number) => void;
   setadults: (adults: Number) => void;
   setchildren: (children: Number) => void;
@@ -20,6 +22,8 @@ export const Context = createContext<ContextType>({
   rooms: 0,
   adults: 0,
   children: 0,
+  bookButton: false,
+  setbookButton: () => {},
   setrooms: () => {},
   setadults: () => {},
   setchildren: () => {},
@@ -30,6 +34,7 @@ const AppWrapper = () => {
   const [rooms, setrooms] = useState<Number>(0);
   const [adults, setadults] = useState<Number>(0);
   const [children, setchildren] = useState<Number>(0);
+  const [bookButton, setbookButton] = useState<boolean>(false);
 
 
   return (
@@ -37,9 +42,12 @@ const AppWrapper = () => {
       rooms,
       adults,
       children,
+      bookButton,
+      setbookButton,
       setrooms,
       setadults,
-      setchildren, setCheckOut,
+      setchildren,
+      setCheckOut,
     
     }}>
       <App />

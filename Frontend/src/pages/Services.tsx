@@ -10,7 +10,7 @@ import { FadeUp } from "../utils/animation";
 
 interface servicesProps extends React.HTMLAttributes<HTMLDivElement> {}
 const Services = forwardRef<HTMLDivElement, servicesProps>((props, ref) => {
-  console.log(props);
+  props
   
   
   return (

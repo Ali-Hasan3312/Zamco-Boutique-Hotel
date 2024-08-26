@@ -25,7 +25,7 @@ export interface Room extends Document {
     },
     roomReviews: {
         type: Number,
-        default: 0
+        default: 5
     },
     roomStatus: {
         type: Boolean,
@@ -36,6 +36,6 @@ export interface Room extends Document {
         required: [true, "Room photo is required"]
     }
    
-  });
+  },{timestamps:true});
 
   export const Room = model<Room>("Room", RoomSchema)

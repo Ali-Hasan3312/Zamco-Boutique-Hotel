@@ -1,13 +1,13 @@
 import { Document, model, Schema } from "mongoose";
 
-export interface Contact extends Document {
+export interface GetTouch extends Document {
     name: string;
     email: string;
     phoneNumber: string;
-    userMessage: string;
+   
    
   }
-  const ContactSchema = new Schema<Contact>({
+  const ContactSchema = new Schema<GetTouch>({
    name: {
     type: String,
     required: [true, "Name is required"],
@@ -25,11 +25,8 @@ export interface Contact extends Document {
     unique: true,
     trim: true,
    },
-   userMessage: {
-    type: String,
-    required: [true, "Message is required"],
-   },
+   
   
   },{timestamps:true});
 
-  export const Contact = model<Contact>("Contact", ContactSchema)
+  export const GetTouch = model<GetTouch>("GetTouch", ContactSchema)
