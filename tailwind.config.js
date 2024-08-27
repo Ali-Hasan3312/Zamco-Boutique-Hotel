@@ -8,7 +8,9 @@ export default {
     extend: {
       colors: {
         'custom-nav':'#282c2e',
-        'custom-yellow' : '#f2bc24'
+        'custom-yellow' : '#f2bc24',
+        'custom-dashboard': '#d8e6df',
+        'custom-blue': '#3162de',
       },
       components: {
         '.hexagon': {
