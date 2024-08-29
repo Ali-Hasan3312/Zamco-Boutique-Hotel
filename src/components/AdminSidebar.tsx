@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { AiFillFileText } from 'react-icons/ai'
-import { FaRegStar } from "react-icons/fa"
 import { FiShoppingCart } from "react-icons/fi"
 import { HiMenuAlt4 } from 'react-icons/hi'
 import { IoMdMail } from 'react-icons/io'
@@ -58,39 +57,34 @@ const AdminSideBar = () => {
        
         
         <ul className=''>
-            <li  className=' py-1 px-4 my-2 rounded-lg'>
-                <Link to={"/admin/dashboard"} className={`flex content-center text-lg items-center gap-3 text-opacity-85 py-2 w-[200px] px-3 ${location.pathname==='/admin/dashboard'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
+            <li  className=''>
+                <Link to={"/admin/dashboard"} className={`flex content-center  mx-auto text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/dashboard'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
                 <TfiDashboard />
                     Dashboard
                 </Link>
 
             </li>
-            <li className=' py-1 px-4 my-2 rounded-lg'>
-                <Link to={"/admin/products"} className={`flex content-center text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/mail'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
+            <li className='my-2'>
+                <Link to={"/admin/mails"} className={`flex content-center  mx-auto text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/mails'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
                 <IoMdMail />
                 Mails
                 </Link>
             </li>
-            <li className=' py-1 px-4 my-2 rounded-lg'>
-                <Link to={"/admin/customers"} className={`flex content-center text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/booking'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
+            <li className='my-2'>
+                <Link to={"/admin/bookings"} className={`flex content-center mx-auto text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/bookings'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
                 <FiShoppingCart />
                 Bookings
                 </Link>
             </li>
-            <li className=' py-1 px-4 my-2 rounded-lg'>
-                <Link to={"/admin/transaction"} className={`flex content-center text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/room'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
+            <li className='my-2'>
+                <Link to={"/admin/rooms"} className={`flex content-center mx-auto text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/rooms'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
                 <RiHotelBedLine />
                 Rooms
                 </Link>
             </li>
-            <li className=' py-1 px-4 my-2 rounded-lg'>
-                <Link to={"/admin/transaction"} className={`flex content-center text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/room'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
-                <FaRegStar  />
-                Reviews
-                </Link>
-            </li>
-            <li className=' py-1 px-4 my-2 rounded-lg'>
-                <Link to={"/admin/transaction"} className={`flex content-center text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/Transaction'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
+           
+            <li className='my-2'>
+                <Link to={"/admin/transactions"} className={`flex content-center mx-auto text-lg items-center gap-3 text-opacity-85 hover:bg-custom-blue hover:text-white transition-all duration-300 py-2 w-[200px] px-3 ${location.pathname==='/admin/transactions'? 'bg-custom-blue text-white' : 'text-gray-800'}`}>
                 <AiFillFileText />
                 Transactions
                 </Link>

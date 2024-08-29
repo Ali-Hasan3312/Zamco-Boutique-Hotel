@@ -6,7 +6,38 @@ import { FaStar } from "react-icons/fa";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { motion } from "framer-motion";
 import {BookingBarChart, EarningsPieChart, ReviewsBarChart} from "../components/charts";
+import { useEffect, useState } from "react";
+import axios from "axios";
+export interface BookingStats {
+  month: string;
+  totalBookings: number;
+}
+
+export interface DashboardStats {
+  availableRoomsCount: number;
+  bookingsCount: number;
+  tenMonthsBookings: BookingStats;
+  thisMonthRevenue: number;
+  thisweekBookings: number;
+  todayBookings: number;
+}
 const Dashboard = () => {
+  const [data, setData] = useState<DashboardStats | null>(null);
+
+  useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const response = await axios.get('http://localhost:4000/api/v1/stats');
+              setData(response.data.stats);
+          } catch (error) {
+              console.error("Error fetching data:", error);
+          }
+      };
+
+      fetchData();
+  }, []);
+ 
+  
   return (
     <div className='h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] gap-4 overflow-hidden'>
        <AdminSideBar />
@@ -34,7 +65,7 @@ const Dashboard = () => {
             <div className="flex flex-col">
             
                 <span className=" text-lg">Total Booking</span>
-                <span className=" font-semibold">12</span>
+                <span className=" font-semibold">{data?.bookingsCount}</span>
               
             </div>
           </div>
@@ -48,7 +79,7 @@ const Dashboard = () => {
             <div className="flex flex-col">
             
                 <span className=" text-lg">Available Rooms</span>
-                <span className=" font-semibold">5</span>
+                <span className=" font-semibold">{data?.availableRoomsCount}</span>
               
             </div>
           </div>
@@ -76,7 +107,7 @@ const Dashboard = () => {
             <div className="flex flex-col">
             
                 <span className=" text-lg">Total Earnings</span>
-                <span className=" font-semibold">1400$</span>
+                <span className=" font-semibold">{data?.thisMonthRevenue}$</span>
               
             </div>
           </div>
