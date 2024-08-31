@@ -19,6 +19,7 @@
     "@visx/shape": "^3.5.0",
     "apexcharts": "^3.52.0",
     "axios": "^1.7.5",
+    "firebase": "^10.13.1",
     "flatpickr": "^4.6.13",
     "framer-motion": "^11.3.28",
     "graph": "^0.2.0",

@@ -10,6 +10,8 @@ const Emails = lazy(() => import('./admin/emails'));
 const Bookings = lazy(() => import('./admin/bookings'));
 const Rooms = lazy(() => import('./admin/rooms'));
 const Transactions = lazy(() => import('./admin/transactions'));
+const SignIn = lazy(() => import('./admin/SignIn')); 
+const SignUp = lazy(() => import('./admin/SignUp'));
 const Loader = lazy(() => import("./components/Loader"));
 
 
@@ -18,12 +20,11 @@ function App() {
 
   return (
     <Router>
-     
-       
         <Suspense fallback={<Loader />}>
-        
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path='/admin' element={<SignIn />} />
+            <Route path='/admin/signup' element={<SignUp />} />
             <Route path='/admin/dashboard' element={<Dashboard />} />
             <Route path='/admin/mails' element={<Emails />} />
             <Route path='/admin/rooms' element={<Rooms />} />

@@ -8,11 +8,11 @@ import { motion } from "framer-motion";
 import {BookingBarChart, EarningsPieChart, ReviewsBarChart} from "../components/charts";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 export interface BookingStats {
   month: string;
   totalBookings: number;
 }
-
 export interface DashboardStats {
   availableRoomsCount: number;
   bookingsCount: number;
@@ -23,11 +23,11 @@ export interface DashboardStats {
 }
 const Dashboard = () => {
   const [data, setData] = useState<DashboardStats | null>(null);
-
+  const navigate = useNavigate()
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await axios.get('http://localhost:4000/api/v1/stats');
+              const response = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/stats`);
               setData(response.data.stats);
           } catch (error) {
               console.error("Error fetching data:", error);
@@ -50,6 +50,12 @@ const Dashboard = () => {
         <input type="text" placeholder="Search" className="h-full placeholder:text-gray-500 w-[80%] rounded-md outline-none" />
         <VscSearch className=" z-20"/>
        </div>
+       <button
+       onClick={()=>{
+        
+        navigate('/')
+       }}
+        className="h-12 w-32 ml-64 bg-red-600 rounded-md text-white font-semibold">Logout</button>
        </div>
         <div className=" text-white relative top-20 text-3xl font-semibold left-4">Hi, Usman Welcome Back!</div>
         <div className="grid grid-cols-4">

@@ -32,7 +32,7 @@ const ContactUs = forwardRef<HTMLDivElement, ContactSectionProps>((props, ref) =
     }
 
     try {
-      const response = await axios.post("http://localhost:4000/api/v1/contact", {
+      const response = await axios.post("https://zamco-boutique-backend.onrender.com/api/v1/contact", {
         name: formData.name,
         email: formData.email,
         phoneNumber: formData.phoneNumber,

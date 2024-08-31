@@ -14,14 +14,10 @@ interface NavItemProps {
   children: React.ReactNode;
   menuItems?: { label: string; to: string }[];
   tagId?: string;
-  onClick?: () => void; // Add onClick prop
-  
+  onClick?: () => void;
 }
 
-
-
-
-const NavItem = ({ to, children, menuItems, onClick}: NavItemProps) => {
+const NavItem = ({ to, children, menuItems, onClick }: NavItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleClick = (e: React.MouseEvent) => {
     if (onClick) {
@@ -29,25 +25,27 @@ const NavItem = ({ to, children, menuItems, onClick}: NavItemProps) => {
       onClick();
     }
   };
+
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="relative h-fit w-fit"
     >
-      <Link to={to!}
-      onClick={handleClick}
-      >
+      <Link to={to || "#"} onClick={handleClick}>
         <span
           style={{ transform: isHovered ? "scaleX(1)" : "scaleX(0)" }}
           className="absolute -top-2 -left-2 -right-2 h-1 origin-left rounded-full bg-yellow-400 transition-transform duration-300 ease-out"
         ></span>
         {children}
       </Link>
-        {menuItems && menuItems.length > 0 && (
+      {menuItems && menuItems.length > 0 && (
         <div
           className="absolute top-7 -left-6 bg-white text-black py-2 rounded shadow-md transition-opacity duration-300"
-          style={{ opacity: isHovered ? "1" : "0", pointerEvents: isHovered ? "auto" : "none" }}
+          style={{
+            opacity: isHovered ? "1" : "0",
+            pointerEvents: isHovered ? "auto" : "none",
+          }}
         >
           {menuItems.map((item, index) => (
             <Link
@@ -64,20 +62,24 @@ const NavItem = ({ to, children, menuItems, onClick}: NavItemProps) => {
     </div>
   );
 };
+
 interface NavbarProps {
   onScrollToContact: () => void;
   onScrollToGallery: () => void;
   onScrollToServices: () => void;
   onScrollToRooms: () => void;
-         
 }
 
-const Navbar  = ({ onScrollToContact,onScrollToGallery,onScrollToServices,onScrollToRooms }: NavbarProps) => {
+const Navbar = ({
+  onScrollToContact,
+  onScrollToGallery,
+  onScrollToServices,
+  onScrollToRooms,
+}: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [phoneActive, setPhoneActive] = useState<boolean>(
     window.innerWidth < 600
   );
-  
 
   const resizeHandler = () => {
     setPhoneActive(window.innerWidth < 600);
@@ -85,10 +87,7 @@ const Navbar  = ({ onScrollToContact,onScrollToGallery,onScrollToServices,onScro
 
   const handleCloseMenu = () => {
     setIsOpen(false);
-   
   };
- 
- 
 
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
@@ -110,37 +109,39 @@ const Navbar  = ({ onScrollToContact,onScrollToGallery,onScrollToServices,onScro
           variants={FadeRight(0.2)}
         >
           <div className="flex flex-col items-center text-black gap-12 max-sm:gap-4">
-          <NavItem>Home</NavItem>
+            <NavItem>Home</NavItem>
             <NavItem onClick={onScrollToRooms}>Rooms</NavItem>
             <NavItem onClick={onScrollToServices}>Amenities & Services</NavItem>
             <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
             <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
+            <NavItem to="/admin/dashboard">Dashboard</NavItem>
           </div>
         </motion.aside>
       )}
 
       <div className="">
-        <div className=" h-[100px] w-full flex items-center justify-between px-32 max-sm:px-2 max-sm:h-24">
-        <div>
-          <div className="h-16 w-32 text-4xl max-sm:h-8 max-sm:w-20 max-sm:text-lg max-sm:gap-2 cursor-pointer tracking-wide text-gray-800 flex items-center text-nowrap gap-4">
-            <img src={logo} className=" object-cover" alt="" />
+        <div className="h-[100px] w-full flex items-center justify-between px-32 max-sm:px-2 max-sm:h-24">
+          <div>
+            <div className="h-16 w-36 text-4xl max-sm:h-8 max-sm:w-20 max-sm:text-lg max-sm:gap-2 cursor-pointer tracking-wide text-gray-800 flex items-center text-nowrap gap-4">
+              <img src={logo} className="object-cover" alt="" />
+            </div>
+          </div>
+          <div className="flex items-center text-xl text-nowrap tracking-wide gap-16 max-sm:gap-3 max-sm:text-sm">
+            <div className="flex items-center gap-1">
+              <IoCall className="text-yellow-500 opacity-70" />
+              <span>+1 212 555 6688</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <span>Fax:</span>
+              <p className="font-normal">+1 212 555 6699</p>
+            </div>
+
+           
           </div>
         </div>
-        <div className="flex items-center text-xl text-nowrap tracking-wide gap-16 max-sm:gap-3 max-sm:text-sm">
-          <div className="flex items-center gap-1">
-            <IoCall className="text-yellow-500 opacity-70" />
-            <span>+1 212 555 6688</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <span>Fax:</span>
-            <p className="font-normal">+1 212 555 6699</p>
-          </div>
-         
-        </div>
-      </div>
         <nav
           className={`sticky top-0 z-50 h-16 w-full max-sm:text-sm max-sm:px-4 max-sm:text-nowrap bg-custom-nav text-white text-xl flex items-center justify-between px-16 tracking-wider ${
-            phoneActive ? " justify-center" : ""
+            phoneActive ? "justify-center" : ""
           }`}
         >
           {phoneActive ? (
@@ -148,7 +149,7 @@ const Navbar  = ({ onScrollToContact,onScrollToGallery,onScrollToServices,onScro
               <button
                 id="hamburger"
                 onClick={() => setIsOpen(false)}
-                className=" grid place-items-center h-12 w-12 border-none outline-none cursor-pointer text-white bg-opacity-100 absolute top-[10%] left-4 text-3xl bg-inherit rounded-full z-[9]"
+                className="grid place-items-center h-12 w-12 border-none outline-none cursor-pointer text-white bg-opacity-100 absolute top-[10%] left-4 text-3xl bg-inherit rounded-full z-[9]"
               >
                 <IoClose />
               </button>
@@ -159,7 +160,7 @@ const Navbar  = ({ onScrollToContact,onScrollToGallery,onScrollToServices,onScro
                   e.stopPropagation();
                   setIsOpen(true);
                 }}
-                className=" grid place-items-center h-12 w-12 border-none outline-none cursor-pointer text-white bg-opacity-100 absolute top-[10%] left-4 text-3xl bg-inherit rounded-full z-[9]"
+                className="grid place-items-center h-12 w-12 border-none outline-none cursor-pointer text-white bg-opacity-100 absolute top-[10%] left-4 text-3xl bg-inherit rounded-full z-[9]"
               >
                 <HiMenuAlt4 />
               </button>
@@ -167,15 +168,18 @@ const Navbar  = ({ onScrollToContact,onScrollToGallery,onScrollToServices,onScro
           ) : (
             <></>
           )}
-          {!phoneActive && ( // Render links only when not in mobile view
-          <div className="flex items-center gap-12 max-sm:gap-4">
-            <NavItem>Home</NavItem>
-            <NavItem onClick={onScrollToRooms}>Rooms</NavItem>
-            <NavItem onClick={onScrollToServices}>Amenities & Services</NavItem>
-            <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
-            <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
-          </div>
-        )}
+          {!phoneActive && (
+            <div className="flex items-center gap-12 max-sm:gap-4">
+              <NavItem>Home</NavItem>
+              <NavItem onClick={onScrollToRooms}>Rooms</NavItem>
+              <NavItem onClick={onScrollToServices}>
+                Amenities & Services
+              </NavItem>
+              <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
+              <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
+              <NavItem to="/admin">Dashboard</NavItem>
+            </div>
+          )}
           {phoneActive && <div></div>}
           <div className="flex items-center gap-8 max-sm:gap-4">
             <Link to={"https://www.facebook.com"}>

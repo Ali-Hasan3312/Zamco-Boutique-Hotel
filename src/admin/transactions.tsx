@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useId, useState } from "react";
 import toast from "react-hot-toast";
 import { VscSearch } from "react-icons/vsc";
 import { Column, useTable } from "react-table";
@@ -12,8 +12,15 @@ interface DataType {
   discount: number;
   rooms: number;
   amount: string;
-  status: "unpaid" | "paid";
+  status: string;
   action: ReactElement;
+}
+interface DataType2 {
+  name: string;
+  roomPrice: number;
+  discount: number;
+  rooms: number;
+  paymentStatus: string;
 }
 
 const columns: Column<DataType>[] = [
@@ -49,7 +56,7 @@ const columns: Column<DataType>[] = [
     Header: "Status",
     accessor: "status",
     Cell: ({ cell: { value } }) => (
-      <div className="text-center capitalize text-red-500">{value}</div>
+      <div className={`text-center capitalize ${value === "Unpaid" ? "text-red-500" : "text-green-500"}`}>{value}</div>
     ),
   },
   {
@@ -63,23 +70,36 @@ const columns: Column<DataType>[] = [
 
 const Transactions = () => {
   const [data, setData] = useState<DataType[]>([]);
-
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState<DataType | null>(null);
+  const uniqueId = useId()
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/v1/book/getAll`, {
+        const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/book/getAll`, {
           withCredentials: true,
         });
         if (res.data) {
-          const transactions = res.data.booking.map((i: any) => ({
+          const transactions = res.data.booking.map((i: DataType2) => ({
             guest: i.name,
-            amount: i.roomPrice,  // Ensure roomPrice is a number
+            amount: i.roomPrice.toString(),
             discount: i.discount,
             rooms: i.rooms,
-            status: "unpaid",
+            status: i.paymentStatus,
             action: (
-              <button className="bg-blue-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-blue-700">
-                Manage
+              <button
+                onClick={() => handleViewClick({
+                  guest: i.name,
+                  amount: i.roomPrice.toString(),
+                  roomPrice: i.roomPrice, // Pass roomPrice here as well
+                  discount: i.discount,
+                  rooms: i.rooms,
+                  status: i.paymentStatus,
+                  action: <></>
+                })}
+                className="bg-blue-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-blue-700"
+              >
+                View
               </button>
             ),
           }));
@@ -92,6 +112,15 @@ const Transactions = () => {
 
     fetchTransactions();
   }, []);
+  const handleViewClick = (transaction: DataType) => {
+    setSelectedTransaction(transaction);
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedTransaction(null);
+  };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
     columns,
@@ -123,35 +152,71 @@ const Transactions = () => {
            initial="hidden"
            whileInView={"visible"}
         className="p-4 relative -top-52">
-          <table {...getTableProps()} className="min-w-full bg-white border rounded-md">
-            <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th {...column.getHeaderProps()} className="border p-2 text-center">
-                      {column.render("Header")}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
-                      <td {...cell.getCellProps()} className="border p-2 text-center">
-                        {cell.render("Cell")}
-                      </td>
+         <table {...getTableProps()} className="w-[95%] bg-white border">
+              <thead>
+                {headerGroups.map((headerGroup) => (
+                  <tr {...headerGroup.getHeaderGroupProps()} key={uniqueId}>
+                    {headerGroup.headers.map((column) => (
+                      <th {...column.getHeaderProps()} key={column.id} className="border p-2 text-center">
+                        {column.render("Header")}
+                      </th>
                     ))}
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                ))}
+              </thead>
+              <tbody {...getTableBodyProps()}>
+                {rows.map((row,rowIndex) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()} key={rowIndex}>
+                      {row.cells.map((cell, cellIndex) => (
+                        <td {...cell.getCellProps()} key={cellIndex} className="border p-2 text-center">
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
         </motion.div>
       </div>
+       {/* Popup for viewing transaction details */}
+       {isPopupOpen && selectedTransaction && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
+            className="bg-white p-8 rounded-lg shadow-lg"
+          >
+            <h2 className="text-2xl font-semibold mb-4">Transaction Details</h2>
+            <div className="mb-4">
+              <strong>Guest:</strong> {selectedTransaction.guest}
+            </div>
+            <div className="mb-4">
+              <strong>Amount:</strong> ${selectedTransaction.amount}
+            </div>
+            <div className="mb-4">
+              <strong>Discount:</strong> {selectedTransaction.discount}%
+            </div>
+            <div className="mb-4">
+              <strong>Rooms:</strong> {selectedTransaction.rooms}
+            </div>
+            <div className="mb-4">
+              <strong>Status:</strong> {selectedTransaction.status}
+            </div>
+            <div className="flex justify-end">
+              <button
+                onClick={handleClosePopup}
+                className="px-4 py-2 bg-blue-600 text-white rounded"
+              >
+                Close
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };
