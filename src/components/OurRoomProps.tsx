@@ -20,19 +20,15 @@ const OurRoomProps = ({
     price,
     roomType,
     description,
-    to
+    to,
 }:OurRoomPropsTypes) => {
     const [isHovered, setIsHovered] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
-    const {checkOut, setbookButton} = useContext(Context)
-    
-    
+    const {checkOut, setbookButton, checkIn,rooms} = useContext(Context)
     const [formData, setFormData] = useState({
       name: '',
       email: '',
       contact: '',
-      childs: '',
-      adults: '',
     });
    
     const handleButtonClick = () => {
@@ -56,16 +52,15 @@ const OurRoomProps = ({
           return;
         }
         try {
-          const response = await axios.post('http://localhost:4000/api/v1/book', {
+          const response = await axios.post('https://zamco-boutique-backend.onrender.com/api/v1/book', {
             name: formData.name,
             email: formData.email,
             phoneNumber: formData.contact,
-            child: formData.childs,
-            adult: formData.adults,
+            checkIn,
             checkOut,
+            rooms,
             roomId: to, // Replace with the actual roomId
           });
-     
       
           if (response.data.success) {
             toast.success("Room booked successfully!");
@@ -136,15 +131,6 @@ const OurRoomProps = ({
                   <label className=" text-black font-semibold">Contact</label>
                   <input type="text" name="contact" value={formData.contact} onChange={handleChange} className=" w-[80%] py-2 px-2" />
                 </div>
-                <div className="flex flex-col px-2 gap-2 w-full">
-                  <label className=" text-black font-semibold">Childs</label>
-                  <input type="number" name="childs" value={formData.childs} onChange={handleChange} className=" w-[80%] py-2 px-2" />
-                </div>
-                <div className="flex flex-col px-2 gap-2 w-full">
-                  <label className=" text-black font-semibold">Adults</label>
-                  <input type="number" name="adults" value={formData.adults} onChange={handleChange} className=" w-[80%] py-2 px-2" />
-                </div>
-               
               </div>
               <button onClick={handleSubmit} className="bg-gray-500 absolute bottom-6 left-36 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Submit

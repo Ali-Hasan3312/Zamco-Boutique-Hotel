@@ -22,10 +22,11 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
     setadults,
     setchildren, 
     setCheckOut,
-    
+    setCheckIn
    } = useContext(Context);
    
- setCheckOut(endDate)
+ setCheckOut(endDate);
+ setCheckIn(startDate);
   const handleSearch = () => {
     setrooms(maxRooms);
     setadults(maxAdults);

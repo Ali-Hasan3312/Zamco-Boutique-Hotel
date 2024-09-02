@@ -6,6 +6,10 @@ import './index.css';
 interface ContextType {
   checkOut: Date | null;
   setCheckOut: (date: Date | null) => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
+  checkIn: Date | null;
+  setCheckIn: (date: Date | null) => void;
   rooms: Number;
   adults: Number;
   children: Number;
@@ -19,10 +23,14 @@ interface ContextType {
 export const Context = createContext<ContextType>({
   checkOut: null,
   setCheckOut: () => {}, // Default function to avoid errors
+  checkIn: null,
+  setCheckIn: () => {}, // Default function to avoid errors
   rooms: 0,
   adults: 0,
   children: 0,
   bookButton: false,
+  isAuthenticated: false,
+  setIsAuthenticated: () => {},
   setbookButton: () => {},
   setrooms: () => {},
   setadults: () => {},
@@ -31,14 +39,19 @@ export const Context = createContext<ContextType>({
 
 const AppWrapper = () => {
   const [checkOut, setCheckOut] = useState<Date | null>(null);
+  const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [rooms, setrooms] = useState<Number>(0);
   const [adults, setadults] = useState<Number>(0);
   const [children, setchildren] = useState<Number>(0);
   const [bookButton, setbookButton] = useState<boolean>(false);
-
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Add this to state
 
   return (
-    <Context.Provider value={{ checkOut,
+    <Context.Provider value={{
+      isAuthenticated,
+      setIsAuthenticated,
+      checkIn,
+      checkOut,
       rooms,
       adults,
       children,
@@ -48,9 +61,11 @@ const AppWrapper = () => {
       setadults,
       setchildren,
       setCheckOut,
-    
+      setCheckIn,
     }}>
-      <App />
+      
+        <App />
+     
     </Context.Provider>
   );
 };

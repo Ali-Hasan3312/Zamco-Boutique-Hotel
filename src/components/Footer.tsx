@@ -39,7 +39,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
        
     
         try {
-          const response = await axios.post("http://localhost:4000/api/v1/touch", {
+          const response = await axios.post("https://zamco-boutique-backend.onrender.com/api/v1/touch", {
             name: formData.name,
             email: formData.email,
             phoneNumber: formData.phoneNumber,
@@ -192,7 +192,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
         </div>
     </div>
     <div className="h-24 w-full bg-zinc-800 flex items-center max-sm:text-[12px] max-sm:leading-tight justify-between px-20 max-sm:px-8 text-gray-500 text-xl">
-     <span className="">© 2024 Zamco Hostel. All rights reserved</span>
+     <span className="">© 2024 Zamco Boutique Hotel. All rights reserved</span>
      <div className="flex items-center gap-4 max-sm:gap-1">
     
      <Link to={"#"} className="hover:text-custom-yellow transition-all duration-300 text-nowrap max-sm:ml-2">Privacy Policy</Link>
