@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom"; 
-import logo from "../assets/Zamco_logo.jpg";
-import { FormEvent, useContext, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { FormEvent, useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/Zamco_logo.jpg";
+import { auth } from "../firebase";
 import { Context } from "../main";
 
 const SignIn = () => {
@@ -76,14 +76,7 @@ const SignIn = () => {
               >
                 Password
               </label>
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
+             
             </div>
             <div className="mt-2">
               <input
@@ -108,12 +101,12 @@ const SignIn = () => {
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
+        {/* <p className="mt-10 text-center text-sm text-gray-500">
           Don't have an account?{' '}
           <Link to="/admin/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
             Create account
           </Link>
-        </p>
+        </p> */}
       </div>
     </div>
   );

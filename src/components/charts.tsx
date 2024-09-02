@@ -51,7 +51,7 @@ export function BookingBarChart() {
         const fetchedData = response.data.stats.tenMonthsBookings;
 
         const formattedData = monthNames.map((month, index) => {
-          const bookingData = fetchedData.find((booking: any) => booking._id.month === index + 1);
+          const bookingData = fetchedData.find((booking: any) => booking._id.month === index);
           return {
             month,
             bookings: bookingData ? bookingData.totalBookings : 0,

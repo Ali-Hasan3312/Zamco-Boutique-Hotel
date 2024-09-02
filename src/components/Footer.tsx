@@ -39,7 +39,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
        
     
         try {
-          const response = await axios.post("https://zamco-boutique-backend.onrender.com/api/v1/touch", {
+          const response = await axios.post(`${import.meta.env.VITE_SERVER}/api/v1/touch`, {
             name: formData.name,
             email: formData.email,
             phoneNumber: formData.phoneNumber,

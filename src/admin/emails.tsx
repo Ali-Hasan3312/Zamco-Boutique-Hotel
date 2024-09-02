@@ -32,60 +32,60 @@ const Emails = () => {
   const [popupData, setPopupData] = useState<PopupDataType | null>(null);
   const uniqueId = useId()
 
-  useEffect(() => {
-    const fetchAllMails = async () => {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/contact/getAll`, {
-          withCredentials: true,
+  const fetchAllMails = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/contact/getAll`, {
+        withCredentials: true,
+      });
+
+     
+
+      if (res && res.data) {
+        const mails = res.data.mails.map((i: any) => {
+          const id = i._id;
+          const name = i?.name || "N/A";
+          const mobile = i?.phoneNumber || "N/A";
+          const email = i?.email || "N/A";
+          const message = i?.userMessage?.length > 50 
+            ? `${i.userMessage.substring(0, 50)}...` 
+            : i?.userMessage || "No message";
+
+          return {
+            id,
+            name,
+            mobile,
+            email,
+            message,
+            date: i?.createdAt ? new Date(i.createdAt).toLocaleDateString() : "Unknown date",
+            action: (
+              <div className="flex gap-2 justify-center">
+                <button 
+                  onClick={() => handleViewClick(i)}
+                  className="bg-blue-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-blue-700">
+                  View
+                </button>
+                <button 
+                  onClick={() => handleDelete(i._id)}
+                  className="bg-red-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-red-700">
+                  Delete
+                </button>
+              </div>
+            ),
+          };
         });
 
-       
-
-        if (res && res.data) {
-          const mails = res.data.mails.map((i: any) => {
-            const id = i._id;
-            const name = i?.name || "N/A";
-            const mobile = i?.phoneNumber || "N/A";
-            const email = i?.email || "N/A";
-            const message = i?.userMessage?.length > 50 
-              ? `${i.userMessage.substring(0, 50)}...` 
-              : i?.userMessage || "No message";
-
-            return {
-              id,
-              name,
-              mobile,
-              email,
-              message,
-              date: i?.createdAt ? new Date(i.createdAt).toLocaleDateString() : "Unknown date",
-              action: (
-                <div className="flex gap-2 justify-center">
-                  <button 
-                    onClick={() => handleViewClick(i)}
-                    className="bg-blue-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-blue-700">
-                    View
-                  </button>
-                  <button 
-                    onClick={() => handleDelete(i._id)}
-                    className="bg-red-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-red-700">
-                    Delete
-                  </button>
-                </div>
-              ),
-            };
-          });
-
-          setData(mails);
-        } else {
-          console.error("Unexpected response format:", res);
-          toast.error("Unexpected response format.");
-        }
-      } catch (error: any) {
-        console.error("Error fetching mails:", error);
-        toast.error(error.response?.data?.message || "An error occurred while fetching emails.");
+        setData(mails);
+      } else {
+        console.error("Unexpected response format:", res);
+        toast.error("Unexpected response format.");
       }
-    };
+    } catch (error: any) {
+      console.error("Error fetching mails:", error);
+      toast.error(error.response?.data?.message || "An error occurred while fetching emails.");
+    }
+  };
 
+  useEffect(() => {
     fetchAllMails();
   }, []);
 
@@ -99,8 +99,9 @@ const Emails = () => {
       await axios.delete(`${import.meta.env.VITE_SERVER}/api/v1/contact/delete/${id}`, {
         withCredentials: true,
       });
+      
+      fetchAllMails();
       toast.success("Email deleted successfully!");
-      setData(data.filter(mail => mail.id !== id));
     } catch (error: any) {
       console.error("Error deleting mail:", error);
       toast.error(error.response?.data?.message || "An error occurred while deleting the email.");
