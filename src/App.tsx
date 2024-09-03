@@ -3,8 +3,6 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import { Toaster } from 'react-hot-toast';
 import Dashboard from './admin/dashboard';
-
-
 const Home = lazy(() => import('./pages/Home'));
 const Emails = lazy(() => import('./admin/emails'));
 const Bookings = lazy(() => import('./admin/bookings'));
@@ -13,12 +11,8 @@ const Transactions = lazy(() => import('./admin/transactions'));
 const SignIn = lazy(() => import('./admin/SignIn')); 
 const SignUp = lazy(() => import('./admin/SignUp'));
 const Loader = lazy(() => import("./components/Loader"));
-
-
 function App() {
-  
-
-  return (
+    return (
     <Router>
         <Suspense fallback={<Loader />}>
           <Routes>
@@ -32,12 +26,9 @@ function App() {
             <Route path='/admin/bookings' element={<Bookings />} />
           </Routes>
         </Suspense>
-       
         <Toaster />
     </Router>
   );
 }
-
-
 
 export default App;

@@ -157,7 +157,7 @@ const Bookings = () => {
   });
 
   return (
-    <div className="h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] gap-4 overflow-hidden">
+    <div className="h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] lg:grid-cols-[20%_80%] sm:grid-cols-[1fr] gap-4 overflow-hidden">
       <AdminSideBar />
       <div className="overflow-y-auto -ml-4">
         <div className="h-[350px] w-full relative bg-custom-blue">
