@@ -58,7 +58,7 @@ const ContactUs = forwardRef<HTMLDivElement, ContactSectionProps>((props, ref) =
   };
 
   return (
-    <div ref={ref} {...props} id="contact" className="isolate bg-gray-100 px-6 mt-16 py-8 lg:px-8">
+    <div ref={ref} {...props} id="contact" className="isolate w-[50%] mx-auto rounded-2xl bg-gray-100 px-6 mt-16 py-8 lg:px-8">
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true"
@@ -72,7 +72,7 @@ const ContactUs = forwardRef<HTMLDivElement, ContactSectionProps>((props, ref) =
         ></div>
       </div>
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Contact Us</h2>
+        <h2 className="text-3xl lg:text-3xl font-medium tracking-tight text-gray-900 sm:text-4xl uppercase font-sans">Contact Us</h2>
       </div>
       <form onSubmit={handleSubmit} className="mx-auto mt-4 max-w-xl">
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">

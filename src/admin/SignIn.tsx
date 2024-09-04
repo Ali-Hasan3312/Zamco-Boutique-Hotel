@@ -26,9 +26,8 @@ const SignIn = () => {
           
         }
       })
-      .catch((error) => {
-        const errorMessage = error.message;
-        toast.error(errorMessage);
+      .catch(() => {
+        toast.error("Invalid Email or Password");
         setIsAuthenticated(false);
       });
   };

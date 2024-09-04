@@ -11,6 +11,8 @@ const Transactions = lazy(() => import('./admin/transactions'));
 const SignIn = lazy(() => import('./admin/SignIn')); 
 const SignUp = lazy(() => import('./admin/SignUp'));
 const Loader = lazy(() => import("./components/Loader"));
+const Settings = lazy(() => import("./admin/settings"));
+const Staff = lazy(() => import("./admin/staff"));
 function App() {
     return (
     <Router>
@@ -24,6 +26,8 @@ function App() {
             <Route path='/admin/rooms' element={<Rooms />} />
             <Route path='/admin/transactions' element={<Transactions />} />
             <Route path='/admin/bookings' element={<Bookings />} />
+            <Route path='/admin/settings' element={<Settings />} />
+            <Route path='/admin/staff' element={<Staff />} />
           </Routes>
         </Suspense>
         <Toaster />

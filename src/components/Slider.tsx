@@ -118,18 +118,18 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
           <input type="date"
            value={startDate ? startDate.toISOString().split('T')[0] : ''}
            onChange={handleStartDateChange}
-          className=" h-10 w-48 lg:w-32 px-2 border border-gray-300 text-sm" />
+          className=" h-10 w-48 px-2 border border-gray-300 text-sm" />
         </div>
         <div className="flex flex-col gap-1">
           <label className=" font-medium">Check Out</label>
           <input type="date"
            value={endDate ? endDate.toISOString().split('T')[0] : ''}
            onChange={handleEndDateChange}
-          className=" h-10 w-48 lg:w-32 px-2 border border-gray-300 text-sm" />
+          className=" h-10 w-48 px-2 border border-gray-300 text-sm" />
         </div>
         <div className="flex flex-col gap-1">
           <label className=" font-medium">Rooms</label>
-          <select className="border border-gray-300 outline-none h-10 text-sm  max-sm:w-48 lg:w-32  sm:w-48"
+          <select className="border border-gray-300 outline-none h-10 text-sm  max-sm:w-48  sm:w-48"
           onChange={(event)=>setMaxRooms(parseInt(event.target.value))}
           >
             <option>01</option>
@@ -142,7 +142,7 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
         </div>
         <div className="flex flex-col gap-1">
           <label className=" font-medium">Adult</label>
-          <select className="border border-gray-300 text-sm outline-none h-10 max-sm:w-48 lg:w-32 sm:w-48"
+          <select className="border border-gray-300 text-sm outline-none h-10 max-sm:w-48 sm:w-48"
           onChange={(event)=> setMaxAdults(parseInt(event.target.value))}
           >
             <option>01</option>
@@ -155,7 +155,7 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
         </div>
         <div className="flex flex-col gap-1">
           <label className=" font-medium">Children</label>
-          <select className="border border-gray-300 text-sm outline-none h-10 max-sm:w-48 lg:w-32 sm:w-48"
+          <select className="border border-gray-300 text-sm outline-none h-10 sm:w-48"
           onChange={(event)=> setMaxChildren(parseInt(event.target.value))}
           >
             <option>01</option>
@@ -166,7 +166,7 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
             <option>06</option>
           </select>
         </div>
-        <div className="h-10 w-60 bg-custom-yellow flex items-center justify-center text-white hover:shadow-lg hover:bg-white hover:text-black transition-all duration-500 cursor-pointer lg:w-36">
+        <div className="h-10 w-60 bg-custom-yellow mt-6 flex items-center justify-center text-white hover:shadow-lg hover:bg-white hover:text-black transition-all duration-500 cursor-pointer lg:w-36">
           <button 
           onClick={handleSearch}
           >Check Availability</button>
