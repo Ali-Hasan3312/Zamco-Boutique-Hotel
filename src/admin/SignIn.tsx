@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/Zamco_logo.jpg";
 import { auth } from "../firebase";
 import { Context } from "../main";
+import axios from "axios";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -15,15 +16,26 @@ const SignIn = () => {
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async(userCredential) => {
         // Signed in 
         const user = userCredential.user;
         if (user) {
-          navigate("/admin/dashboard");
-          toast.success("Login Successfully");
-          setIsAuthenticated(true);
-          console.log(user);
-          
+          try {
+            const response = await axios.get(
+              `${import.meta.env.VITE_SERVER}/api/v1/staff/getSingle/${user.uid}`, // Backend API to fetch user by uid
+              {
+                withCredentials: true,
+              }
+            );
+            if(response.data.success){
+              setIsAuthenticated(true);
+              navigate("/admin/dashboard");
+              toast.success("Login Successfully");
+            }
+          } catch (error: any) {
+            console.error("Error fetching user data:", error);
+            toast.error("Failed to fetch user data.");
+          }
         }
       })
       .catch(() => {
@@ -68,15 +80,12 @@ const SignIn = () => {
           </div>
 
           <div>
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-             
-            </div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Password
+            </label>
             <div className="mt-2">
               <input
                 id="password"
@@ -99,13 +108,6 @@ const SignIn = () => {
             </button>
           </div>
         </form>
-
-        {/* <p className="mt-10 text-center text-sm text-gray-500">
-          Don't have an account?{' '}
-          <Link to="/admin/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-            Create account
-          </Link>
-        </p> */}
       </div>
     </div>
   );

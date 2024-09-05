@@ -1,13 +1,16 @@
 import { VscSearch } from "react-icons/vsc";
 import AdminSideBar from "../components/AdminSidebar";
 import { useTable, Column } from "react-table";
-import { ReactElement, useEffect, useId, useMemo, useState } from "react";
+import { ChangeEvent, ReactElement, useContext, useEffect, useId, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { FadeUp } from "../utils/animation";
 import { Link } from "react-router-dom";
-
+import userProfile from "../assets/Profile.png"
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { Context } from "../main";
 interface DataType {
   id: string;
   image: string;
@@ -19,11 +22,11 @@ interface DataType {
   joiningDate: string;
   action: ReactElement;
 }
-
 const Staff = () => {
+  const {user} = useContext(Context)
   const [data, setData] = useState<DataType[]>([]);
   const [showModal, setShowModal] = useState(false); 
-  const [photo, setPhoto] = useState<File | null>(null);
+  const [photo, setPhoto] = useState<File | string>(userProfile);
   const [newStaff, setNewStaff] = useState({
     name: "",
     email: "",
@@ -31,7 +34,7 @@ const Staff = () => {
     password: "",
     designation: "",
     address: "",
-    joiningDate: "",
+    dateofBirth: "",
     image: "",
   });
 
@@ -42,9 +45,11 @@ const Staff = () => {
       const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/staff/getAll`, {
         withCredentials: true,
       });
+     console.log(user);
+     
       
-      const staffData = res.data || [];
-      if (res.data) {
+      const staffData = Array.isArray(res.data.users) ? res.data.users : [];
+      if (staffData.length > 0) {
         const staff = staffData.map((i: any) => {
           const id = i._id;
           const image = i?.photo || "N/A"; // Ensure your API returns the image URL or path
@@ -89,15 +94,16 @@ const Staff = () => {
       toast.error(error.response?.data?.message || "An error occurred while fetching staff.");
     }
   };
-
   useEffect(() => {
     fetchAllStaff();
   }, []);
 
   const handleDelete = async (id: string) => {
+    
     try {
       await axios.delete(`${import.meta.env.VITE_SERVER}/api/v1/staff/delete/${id}`, {
         withCredentials: true,
+
       });
       
       fetchAllStaff(); 
@@ -106,10 +112,21 @@ const Staff = () => {
       toast.error(error.response?.data?.message || "An error occurred while deleting the member.");
     }
   };
-
+ 
   const handleCreateStaff = async () => {
     try {
-      await axios.post(`${import.meta.env.VITE_SERVER}/api/v1/staff/create`, newStaff, {
+     const userCredentials = await createUserWithEmailAndPassword(auth, newStaff.email, newStaff.password)
+      const formData = new FormData();
+      if(userCredentials){
+        formData.append("_id", userCredentials.user.uid);
+        formData.append("name", newStaff.name);
+        formData.append("email", newStaff.email);
+        formData.append("mobile", newStaff.mobile);
+        formData.append("address", newStaff.address);
+        formData.append("dateOfBirth", newStaff.dateofBirth);
+        formData.append("photo", photo || "");
+      }
+      await axios.post(`${import.meta.env.VITE_SERVER}/api/v1/staff/new`, formData, {
         withCredentials: true,
       });
       setShowModal(false);
@@ -167,6 +184,11 @@ const Staff = () => {
     ],
     [data]
   );
+  const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setPhoto(e.target.files[0]);
+    }
+  };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
     columns,
@@ -284,7 +306,7 @@ const Staff = () => {
                 <input
                   type="password"
                   value={newStaff.password}
-                  onChange={(e) => setNewStaff({ ...newStaff, email: e.target.value })}
+                  onChange={(e) => setNewStaff({ ...newStaff, password: e.target.value })}
                   className="w-full p-2 border rounded"
                   required
                 />
@@ -313,8 +335,8 @@ const Staff = () => {
                 Date of Birth:
                 <input
                   type="date"
-                  value={newStaff.joiningDate}
-                  onChange={(e) => setNewStaff({ ...newStaff, joiningDate: e.target.value })}
+                  value={newStaff.dateofBirth}
+                  onChange={(e) => setNewStaff({ ...newStaff, dateofBirth: e.target.value })}
                   className="w-full p-2 border rounded"
                 />
               </label>
@@ -322,8 +344,8 @@ const Staff = () => {
                 Image
                 <input
                   type="file"
-                  value={newStaff.image}
-                  onChange={(e) => setNewStaff({ ...newStaff, image: e.target.value })}
+                  onChange={handlePhotoChange}
+                  required
                   className="w-full p-2 border rounded"
                 />
               </label>

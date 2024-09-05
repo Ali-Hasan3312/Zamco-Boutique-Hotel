@@ -1,14 +1,15 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { RiHotelBedLine } from "react-icons/ri";
 import { VscSearch } from "react-icons/vsc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AdminSideBar from "../components/AdminSidebar";
 import { BookingBarChart, EarningsPieChart, ReviewsBarChart } from "../components/charts";
+import { Context } from "../main";
 export interface BookingStats {
   month: string;
   totalBookings: number;
@@ -23,7 +24,8 @@ export interface DashboardStats {
 }
 const Dashboard = () => {
   const [data, setData] = useState<DashboardStats | null>(null);
-  
+  const navigate = useNavigate();
+  const {isAuthenticated} = useContext(Context)
   useEffect(() => {
       const fetchData = async () => {
           try {
@@ -36,7 +38,9 @@ const Dashboard = () => {
 
       fetchData();
   }, []);
- 
+  if (!isAuthenticated) {
+    navigate("/admin");
+  }
   
   return (
     <div className='h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] lg:grid-cols-[20%_80%] sm:grid-cols-[1fr] gap-4 overflow-hidden'>
