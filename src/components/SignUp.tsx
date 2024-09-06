@@ -10,7 +10,7 @@ const SignUp = () => {
   const submitHandler = async(e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await axios.post("http://localhost:4000/api/v1/subscribe", {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER}/api/v1/subscribe`, {
         
         email,
         
@@ -33,7 +33,7 @@ const SignUp = () => {
   return (
     <div className="h-[400px] w-full relative mt-12">
         <img className="h-full w-full object-cover" src={discountimage} alt="" />
-        <div className="h-full w-[40%] text-center absolute top-[35%] left-[32%] max-sm:top-[10%] items-center flex flex-col gap-4 text-white">
+        <div className="h-full w-[40%] text-center absolute lg:top-[35%] left-[32%] sm:top-[10%] items-center flex flex-col gap-4 text-white">
         <motion.h1
          variants={FadeUp(0.3)}
          initial="hidden"

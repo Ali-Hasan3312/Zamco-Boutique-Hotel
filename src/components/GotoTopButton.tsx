@@ -24,8 +24,8 @@ const GotoTopButton = () => {
   return (
     <>
     {showButton && (
-        <button onClick={scrollToTop} className='fixed bottom-2 z-[1000] right-2 p-4 rounded-full bg-custom-yellow text-black'>
-        <GrLinkTop />
+        <button onClick={scrollToTop} className='fixed bottom-2 z-[1000] lg:right-2 lg:p-4 sm:p-8 sm:right-8 sm:bottom-8 rounded-full bg-custom-yellow text-black'>
+        <GrLinkTop className='lg:text-sm sm:text-3xl' />
     </button>
     )}
     </>

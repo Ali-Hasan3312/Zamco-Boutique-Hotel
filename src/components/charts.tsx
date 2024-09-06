@@ -11,53 +11,48 @@ import {
   Pie,
   PieChart,
   ResponsiveContainer,
-  Tooltip
+  Tooltip,
+  XAxis
 } from 'recharts';
 import { CustomXAxis, CustomYAxis } from './CustomYAxis';
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-// const data = [
-//   { month: 'Oct', bookings: 300 },
-//   { month: 'Nov', bookings: 450 },
-//   { month: 'Dec', bookings: 500 },
-//   { month: 'Jan', bookings: 320 },
-//   { month: 'Feb', bookings: 400 },
-//   { month: 'Mar', bookings: 380 },
-//   { month: 'Apr', bookings: 450 },
-//   { month: 'May', bookings: 550 },
-//   { month: 'Jun', bookings: 490 },
-//   { month: 'Jul', bookings: 600 },
-// ];
-
-
+const data = [
+  { month: 'Oct', bookings: 300 },
+  { month: 'Nov', bookings: 450 },
+  { month: 'Dec', bookings: 500 },
+  { month: 'Jan', bookings: 320 },
+  { month: 'Feb', bookings: 400 },
+  { month: 'Mar', bookings: 380 },
+  { month: 'Apr', bookings: 450 },
+  { month: 'May', bookings: 550 },
+  { month: 'Jun', bookings: 490 },
+  { month: 'Jul', bookings: 600 },
+];
 
 interface BookingData {
   month: string;
   bookings: number;
 }
 
-
 export function BookingBarChart() {
   const [barChartData, setBarChartData] = useState<BookingData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         const response = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/stats`);
         const fetchedData = response.data.stats.tenMonthsBookings;
-
-        const formattedData = monthNames.map((month, index) => {
-          const bookingData = fetchedData.find((booking: any) => booking._id.month === index + 1);
+        const formattedData = data.map(({ month }) => {
+          const bookingData = fetchedData.find((booking: any) => monthNames[booking._id.month + 1] === month);
           return {
             month,
             bookings: bookingData ? bookingData.totalBookings : 0,
           };
         });
-
         setBarChartData(formattedData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -84,7 +79,7 @@ export function BookingBarChart() {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <CustomXAxis dataKey="month" />
+          <XAxis dataKey="month" />
           <CustomYAxis />
           <Tooltip />
           <Legend />
@@ -94,7 +89,6 @@ export function BookingBarChart() {
     </div>
   );
 }
-
 
 
 export default BookingBarChart;

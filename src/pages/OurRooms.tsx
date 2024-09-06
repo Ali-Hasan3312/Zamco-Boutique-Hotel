@@ -22,7 +22,7 @@ const OurRooms = forwardRef<HTMLDivElement, roomsProps>((props, ref) => {
   useEffect(() => {
     const fetchAllRooms = async () => {
       try {
-        const res = await axios.get(`https://zamco-boutique-backend.onrender.com/api/v1/room/getAll`, {
+        const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/room/getAll`, {
           withCredentials: true,
         });
         if(res.data){

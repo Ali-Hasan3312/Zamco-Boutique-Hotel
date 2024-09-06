@@ -13,7 +13,7 @@ export const  InfoCard = ({ icon, title, description, to }:InfoCardProps) => {
 
   return (
     <motion.div 
-      className="flex flex-col gap-3 items-center justify-center flex-wrap text-center px-8 h-[330px] w-[370px] mx-auto shadow-md bg-white border hover:shadow-xl"
+      className="flex flex-col gap-3 items-center justify-center flex-wrap text-center px-8 h-[330px] w-[370px] sm:w-[490px] lg:w-[430px] mx-auto shadow-md bg-white border hover:shadow-xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       variants={FadeLeft(0.3)}

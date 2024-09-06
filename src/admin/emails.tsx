@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { FadeUp } from "../utils/animation";
+import { Link } from "react-router-dom";
 
 interface DataType {
   id: string;
@@ -32,60 +33,57 @@ const Emails = () => {
   const [popupData, setPopupData] = useState<PopupDataType | null>(null);
   const uniqueId = useId()
 
-  useEffect(() => {
-    const fetchAllMails = async () => {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/contact/getAll`, {
-          withCredentials: true,
+  const fetchAllMails = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/contact/getAll`, {
+        withCredentials: true,
+      });
+      if (res && res.data) {
+        const mails = res.data.mails.map((i: any) => {
+          const id = i._id;
+          const name = i?.name || "N/A";
+          const mobile = i?.phoneNumber || "N/A";
+          const email = i?.email || "N/A";
+          const message = i?.userMessage?.length > 50 
+            ? `${i.userMessage.substring(0, 50)}...` 
+            : i?.userMessage || "No message";
+
+          return {
+            id,
+            name,
+            mobile,
+            email,
+            message,
+            date: i?.createdAt ? new Date(i.createdAt).toLocaleDateString() : "Unknown date",
+            action: (
+              <div className="flex gap-2 justify-center">
+                <button 
+                  onClick={() => handleViewClick(i)}
+                  className="bg-blue-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-blue-700">
+                  View
+                </button>
+                <button 
+                  onClick={() => handleDelete(i._id)}
+                  className="bg-red-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-red-700">
+                  Delete
+                </button>
+              </div>
+            ),
+          };
         });
 
-       
-
-        if (res && res.data) {
-          const mails = res.data.mails.map((i: any) => {
-            const id = i._id;
-            const name = i?.name || "N/A";
-            const mobile = i?.phoneNumber || "N/A";
-            const email = i?.email || "N/A";
-            const message = i?.userMessage?.length > 50 
-              ? `${i.userMessage.substring(0, 50)}...` 
-              : i?.userMessage || "No message";
-
-            return {
-              id,
-              name,
-              mobile,
-              email,
-              message,
-              date: i?.createdAt ? new Date(i.createdAt).toLocaleDateString() : "Unknown date",
-              action: (
-                <div className="flex gap-2 justify-center">
-                  <button 
-                    onClick={() => handleViewClick(i)}
-                    className="bg-blue-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-blue-700">
-                    View
-                  </button>
-                  <button 
-                    onClick={() => handleDelete(i._id)}
-                    className="bg-red-300 hover:bg-inherit hover:text-black hover:transition-all p-1 rounded-lg text-red-700">
-                    Delete
-                  </button>
-                </div>
-              ),
-            };
-          });
-
-          setData(mails);
-        } else {
-          console.error("Unexpected response format:", res);
-          toast.error("Unexpected response format.");
-        }
-      } catch (error: any) {
-        console.error("Error fetching mails:", error);
-        toast.error(error.response?.data?.message || "An error occurred while fetching emails.");
+        setData(mails);
+      } else {
+        console.error("Unexpected response format:", res);
+        toast.error("Unexpected response format.");
       }
-    };
+    } catch (error: any) {
+      console.error("Error fetching mails:", error);
+      toast.error(error.response?.data?.message || "An error occurred while fetching emails.");
+    }
+  };
 
+  useEffect(() => {
     fetchAllMails();
   }, []);
 
@@ -99,8 +97,9 @@ const Emails = () => {
       await axios.delete(`${import.meta.env.VITE_SERVER}/api/v1/contact/delete/${id}`, {
         withCredentials: true,
       });
+      
+      fetchAllMails();
       toast.success("Email deleted successfully!");
-      setData(data.filter(mail => mail.id !== id));
     } catch (error: any) {
       console.error("Error deleting mail:", error);
       toast.error(error.response?.data?.message || "An error occurred while deleting the email.");
@@ -160,12 +159,12 @@ const Emails = () => {
   });
 
   return (
-    <div className="h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] gap-4 overflow-hidden">
+    <div className="h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] lg:grid-cols-[20%_80%] sm:grid-cols-[1fr] gap-4 overflow-hidden">
       <AdminSideBar />
       <div className="overflow-y-auto -ml-4">
         <div className="h-[350px] w-full relative bg-custom-blue">
           <div className="absolute top-2 left-4 flex items-center gap-28">
-            <span className="text-white text-xl">Zamco Boutique Hotel</span>
+            <span className="text-white text-2xl">Zamco Boutique Hotel</span>
             <div className="h-12 w-64 bg-white rounded-md flex items-center justify-between px-4 font-normal">
               <input
                 type="text"
@@ -175,9 +174,19 @@ const Emails = () => {
               <VscSearch className="z-10" />
             </div>
           </div>
-          <div className="text-white relative top-20 text-3xl font-semibold left-4">
+          <div className="flex items-center justify-between">
+         <div className="text-white relative top-20 text-3xl font-semibold left-4">
             My Mails
           </div>
+          <div className="h-14 w-[330px] relative top-20 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
+          <Link to={"/"}>Home</Link>
+          <div className="h-1 w-1 bg-white rounded-full"></div>
+          <Link to={"/admin/dashboard"}>Dashboard</Link>
+          <div className="h-1 w-1 bg-white rounded-full"></div>
+          <span>Mails</span>
+         
+          </div>
+         </div>
           <motion.div
            variants={FadeUp(0.3)}
            initial="hidden"

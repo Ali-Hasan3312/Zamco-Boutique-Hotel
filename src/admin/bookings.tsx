@@ -6,6 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { FadeUp } from "../utils/animation";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface DataType {
   _id: string;
@@ -157,12 +158,12 @@ const Bookings = () => {
   });
 
   return (
-    <div className="h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] gap-4 overflow-hidden">
+    <div className="h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] lg:grid-cols-[20%_80%] sm:grid-cols-[1fr] gap-4 overflow-hidden">
       <AdminSideBar />
       <div className="overflow-y-auto -ml-4">
         <div className="h-[350px] w-full relative bg-custom-blue">
           <div className="absolute top-2 left-4 flex items-center gap-28">
-            <span className="text-white text-xl">Zamco Boutique Hotel</span>
+            <span className="text-white text-2xl">Zamco Boutique Hotel</span>
             <div className="h-12 w-64 bg-white rounded-md flex items-center justify-between px-4 font-normal">
               <input
                 type="text"
@@ -172,7 +173,19 @@ const Bookings = () => {
               <VscSearch className="z-20" />
             </div>
           </div>
-          <div className="text-white relative top-20 text-3xl font-semibold left-4">My Bookings</div>
+          <div className="flex items-center justify-between">
+         <div className="text-white relative top-20 text-3xl font-semibold left-4">
+            My Bookings
+          </div>
+          <div className="h-14 w-[330px] relative top-20 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
+          <Link to={"/"}>Home</Link>
+          <div className="h-1 w-1 bg-white rounded-full"></div>
+          <Link to={"/admin/dashboard"}>Dashboard</Link>
+          <div className="h-1 w-1 bg-white rounded-full"></div>
+          <span>Bookings</span>
+         
+          </div>
+         </div>
         </div>
         <motion.div
          variants={FadeUp(0.3)}

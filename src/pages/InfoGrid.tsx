@@ -5,7 +5,7 @@ import { InfoCard } from '../components/Cards';
 
 const InfoGrid = () => {
     return (
-      <div className="grid grid-cols-3 max-sm:grid-cols-1 max-sm:px-10 gap-8 px-28 max-sm:mt-[450px] mt-32">
+      <div className="grid grid-cols-3 lg:grid-cols-3 lg:px-10 lg:mt-32 sm:grid-cols-1 sm:px-10 sm:mt-[490px] mt-32 gap-8 px-28">
         <InfoCard 
           icon={<IoMapOutline className="text-[50px]" />}
           title="Map & Directions"

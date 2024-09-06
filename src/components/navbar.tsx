@@ -30,7 +30,7 @@ const NavItem = ({ to, children, menuItems, onClick }: NavItemProps) => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative h-fit w-fit"
+      className="relative h-fit w-fit lg:text-lg"
     >
       <Link to={to || "#"} onClick={handleClick}>
         <span
@@ -78,11 +78,11 @@ const Navbar = ({
 }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [phoneActive, setPhoneActive] = useState<boolean>(
-    window.innerWidth < 600
+    window.innerWidth < 1100
   );
 
   const resizeHandler = () => {
-    setPhoneActive(window.innerWidth < 600);
+    setPhoneActive(window.innerWidth < 1100);
   };
 
   const handleCloseMenu = () => {
@@ -103,18 +103,18 @@ const Navbar = ({
     <>
       {isOpen && (
         <motion.aside
-          className="bg-white p-4 z-10 absolute top-[28%] overflow-hidden"
+          className="bg-white p-4 z-10 absolute top-[160px] overflow-hidden"
           initial="hidden"
           whileInView={"visible"}
           variants={FadeRight(0.2)}
         >
-          <div className="flex flex-col items-center text-black gap-12 max-sm:gap-4">
+          <div className="flex flex-col items-center text-black gap-12 sm:gap-4">
             <NavItem>Home</NavItem>
             <NavItem onClick={onScrollToRooms}>Rooms</NavItem>
             <NavItem onClick={onScrollToServices}>Amenities & Services</NavItem>
             <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
             <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
-            <NavItem to="/admin/dashboard">Dashboard</NavItem>
+            <NavItem to="/admin">Dashboard</NavItem>
           </div>
         </motion.aside>
       )}
@@ -135,12 +135,13 @@ const Navbar = ({
               <span>Fax:</span>
               <p className="font-normal">+1 212 555 6699</p>
             </div>
+            
 
            
           </div>
         </div>
         <nav
-          className={`sticky top-0 z-50 h-16 w-full max-sm:text-sm max-sm:px-4 max-sm:text-nowrap bg-custom-nav text-white text-xl flex items-center justify-between px-16 tracking-wider ${
+          className={`sticky top-0 z-50 h-16 w-full sm:text-sm sm:px-4 sm:text-nowrap bg-custom-nav text-white text-xl flex items-center justify-between px-16 tracking-wider ${
             phoneActive ? "justify-center" : ""
           }`}
         >
@@ -169,7 +170,7 @@ const Navbar = ({
             <></>
           )}
           {!phoneActive && (
-            <div className="flex items-center gap-12 max-sm:gap-4">
+            <div className="flex items-center gap-12">
               <NavItem>Home</NavItem>
               <NavItem onClick={onScrollToRooms}>Rooms</NavItem>
               <NavItem onClick={onScrollToServices}>
@@ -177,11 +178,12 @@ const Navbar = ({
               </NavItem>
               <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
               <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
-              <NavItem to="/admin">Dashboard</NavItem>
+              
             </div>
           )}
           {phoneActive && <div></div>}
-          <div className="flex items-center gap-8 max-sm:gap-4">
+          <div className="flex items-center gap-8 lg:gap-8 lg:text-lg sm:gap-4">
+            <Link to={"/admin"} className="h-10 w-32 bg-custom-yellow flex items-center justify-center rounded-md text-black">Dashboard</Link>
             <Link to={"https://www.facebook.com"}>
               <FaFacebookF className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />
             </Link>
