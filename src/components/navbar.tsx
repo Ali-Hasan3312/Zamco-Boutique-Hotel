@@ -114,7 +114,7 @@ const Navbar = ({
             <NavItem onClick={onScrollToServices}>Amenities & Services</NavItem>
             <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
             <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
-            <NavItem to="/admin">Dashboard</NavItem>
+           
           </div>
         </motion.aside>
       )}
@@ -178,12 +178,11 @@ const Navbar = ({
               </NavItem>
               <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
               <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
-              
             </div>
           )}
           {phoneActive && <div></div>}
           <div className="flex items-center gap-8 lg:gap-8 lg:text-lg sm:gap-4">
-            <Link to={"/admin"} className="h-10 w-32 bg-custom-yellow flex items-center justify-center rounded-md text-black">Dashboard</Link>
+            <Link to={"/admin/dashboard"} className="h-10 w-32 bg-custom-yellow flex items-center justify-center rounded-md text-black">Dashboard</Link>
             <Link to={"https://www.facebook.com"}>
               <FaFacebookF className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />
             </Link>

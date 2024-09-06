@@ -29,6 +29,8 @@ const data = [
   { month: 'May', bookings: 550 },
   { month: 'Jun', bookings: 490 },
   { month: 'Jul', bookings: 600 },
+  { month: 'Aug', bookings: 600 },
+  { month: 'Sep', bookings: 600 },
 ];
 
 interface BookingData {
@@ -46,8 +48,9 @@ export function BookingBarChart() {
         setIsLoading(true);
         const response = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/stats`);
         const fetchedData = response.data.stats.tenMonthsBookings;
+        
         const formattedData = data.map(({ month }) => {
-          const bookingData = fetchedData.find((booking: any) => monthNames[booking._id.month + 1] === month);
+          const bookingData = fetchedData.find((booking: any) => monthNames[booking._id.month - 1] === month);
           return {
             month,
             bookings: bookingData ? bookingData.totalBookings : 0,
@@ -55,7 +58,7 @@ export function BookingBarChart() {
         });
         setBarChartData(formattedData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+       
         setError("Failed to fetch booking data");
       } finally {
         setIsLoading(false);

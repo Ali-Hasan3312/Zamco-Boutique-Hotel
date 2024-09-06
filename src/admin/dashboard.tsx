@@ -25,7 +25,7 @@ export interface DashboardStats {
 const Dashboard = () => {
   const [data, setData] = useState<DashboardStats | null>(null);
   const navigate = useNavigate();
-  const {isAuthenticated} = useContext(Context)
+  const {isAuthenticated, user} = useContext(Context)
   useEffect(() => {
       const fetchData = async () => {
           try {
@@ -38,9 +38,11 @@ const Dashboard = () => {
 
       fetchData();
   }, []);
-  if (!isAuthenticated) {
-    navigate("/admin");
-  }
+ useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/admin");
+    }
+  }, [isAuthenticated]);
   
   return (
     <div className='h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] lg:grid-cols-[20%_80%] sm:grid-cols-[1fr] gap-4 overflow-hidden'>
@@ -48,7 +50,7 @@ const Dashboard = () => {
        <div className="overflow-y-auto -ml-4">
         <div className="h-[350px] w-full relative bg-custom-blue">
         
-       <div className="absolute top-2 left-4 flex items-center gap-28">
+        <div className="absolute lg:top-2 sm:top-4 lg:left-8 sm:left-32 flex items-center gap-28">
        <span className=" text-white  text-2xl">Zamco Botique Hotel</span>
        <div className="h-12 w-64 bg-white rounded-md flex items-center justify-between px-4 font-normal">
         <input type="text" placeholder="Search" className="h-full placeholder:text-gray-500 w-[80%] rounded-md outline-none" />
@@ -57,8 +59,8 @@ const Dashboard = () => {
       
        </div>
        <div className="flex items-center justify-between">
-         <div className="text-white relative top-20 text-3xl font-semibold left-4">
-         Hi, Usman Welcome Back!
+         <div className="text-white relative top-20 text-3xl font-semibold lg:left-4 sm:left-8">
+         Hi, {user?.name} Welcome Back!
           </div>
           <div className="h-14 w-[240px] relative top-20 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
           <Link to={"/"}>Home</Link>

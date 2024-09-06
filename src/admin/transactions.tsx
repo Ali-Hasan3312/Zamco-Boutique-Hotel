@@ -133,9 +133,9 @@ const Transactions = () => {
       <AdminSideBar />
       <div className="overflow-y-auto -ml-4">
         <div className="h-[350px] w-full relative bg-custom-blue">
-          <div className="absolute top-2 left-4 flex items-center gap-28">
+        <div className="absolute lg:top-2 sm:top-8 lg:left-8 sm:left-32 flex items-center gap-28">
             <span className="text-white text-2xl">Zamco Boutique Hotel</span>
-            <div className="h-12 w-64 bg-white rounded-md flex items-center justify-between px-4 font-normal">
+            <div className="h-12 w-64 bg-white rounded-md flex lg:ml-0 sm:ml-32 items-center justify-between px-4 font-normal">
               <input
                 type="text"
                 placeholder="Search"
@@ -145,10 +145,10 @@ const Transactions = () => {
             </div>
           </div>
           <div className="flex items-center justify-between">
-         <div className="text-white relative top-20 text-3xl font-semibold left-4">
+          <div className="text-white relative lg:top-20 sm:top-28 text-3xl font-semibold lg:left-4 sm:left-32">
             My Transactions
           </div>
-          <div className="h-14 w-[330px] relative top-20 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
+          <div className="h-14 w-[330px] relative lg:top-20 sm:top-28 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
           <Link to={"/"}>Home</Link>
           <div className="h-1 w-1 bg-white rounded-full"></div>
           <Link to={"/admin/dashboard"}>Dashboard</Link>
@@ -162,7 +162,7 @@ const Transactions = () => {
            variants={FadeUp(0.3)}
            initial="hidden"
            whileInView={"visible"}
-        className="p-4 relative -top-52">
+        className="p-4 relative lg:-top-52 sm:-top-40 lg:ml-0 sm:ml-24">
          <table {...getTableProps()} className="w-[95%] bg-white border">
               <thead>
                 {headerGroups.map((headerGroup) => (

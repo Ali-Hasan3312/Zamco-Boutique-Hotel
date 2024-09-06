@@ -259,9 +259,9 @@ const Rooms = () => {
       <AdminSideBar />
       <div className="overflow-y-auto -ml-4">
         <div className="h-[350px] w-full relative bg-custom-blue">
-          <div className="absolute top-2 left-4 flex items-center gap-28">
+        <div className="absolute lg:top-2 sm:top-8 lg:left-8 sm:left-32 flex items-center gap-28">
             <span className="text-white text-2xl">Zamco Boutique Hotel</span>
-            <div className="h-12 w-64 bg-white rounded-md flex items-center justify-between px-4 font-normal">
+            <div className="h-12 w-64 bg-white rounded-md flex lg:ml-0 sm:ml-32 items-center justify-between px-4 font-normal">
               <input
                 type="text"
                 placeholder="Search"
@@ -271,21 +271,20 @@ const Rooms = () => {
             </div>
           </div>
           <div className="flex items-center justify-between">
-         <div className="text-white relative top-20 text-3xl font-semibold left-4">
+          <div className="text-white relative lg:top-20 sm:top-28 text-3xl font-semibold lg:left-4 sm:left-32">
             My Rooms
           </div>
-          <div className="h-14 w-[330px] relative top-20 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
+          <div className="h-14 w-[330px] relative lg:top-20 sm:top-28 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
           <Link to={"/"}>Home</Link>
           <div className="h-1 w-1 bg-white rounded-full"></div>
           <Link to={"/admin/dashboard"}>Dashboard</Link>
           <div className="h-1 w-1 bg-white rounded-full"></div>
           <span>Rooms</span>
-         
           </div>
          </div>
           <button
             onClick={handleCreateClick}
-            className="relative top-24 left-4 h-10 text-white w-24 rounded-md bg-red-600 hover:opacity-85"
+            className="relative lg:top-28 sm:top-32 hover:opacity-85 lg:left-4 sm:left-28 h-10 w-28 rounded-lg bg-red-600 text-white"
           >
             Create
           </button>
@@ -294,7 +293,7 @@ const Rooms = () => {
           variants={FadeUp(0.3)}
           initial="hidden"
           whileInView={"visible"}
-          className="p-4 relative -top-40"
+          className="p-4 relative lg:-top-36 sm:-top-28 lg:ml-0 sm:ml-20"
         >
           <table {...getTableProps()} className="w-[95%] bg-white border">
               <thead>

@@ -22,7 +22,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
         phoneNumber: "",
        
       });
-      console.log(formData);
+      
       const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
       };
@@ -77,7 +77,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
                 </div>
                 <div className='flex items-center gap-3 max-sm:gap-1'>
                     <IoMdMail className=' text-2xl text-custom-yellow max-sm:text-sm'/>
-                    <Link to={"#"} className='text-base text-white hover:text-custom-yellow max-sm:text-[12px]'>booking@baku.com</Link>
+                    <Link to={"mailto:info@zamcoboutiquehotel.com"} className='text-base text-white hover:text-custom-yellow max-sm:text-[12px]'>info@zamcoboutiquehotel.com</Link>
                 </div>
                 <div className='flex items-center gap-3'>
                     <FaLocationArrow className=' text-2xl text-custom-yellow'/>
@@ -101,11 +101,8 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
             </div>
             <div className='flex flex-col gap-6 mt-12'>
                 <h1 className='text-lg uppercase text-white font-semibold max-sm:text-sm'>Quick links</h1>
-                <div className='grid grid-cols-2 gap-1 max-sm:grid-cols-1'>
-                    <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
-                        <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
-                        <Link to={"#"} className='text-white'>About Us</Link>
-                    </div>
+                <div className='grid grid-cols-1 gap-1 max-sm:grid-cols-1'>
+                   
                     <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
                         <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
                         <button 
@@ -124,10 +121,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
                         onClick={onScrollToGallery}
                         className='text-white'>Gallery</button>
                     </div>
-                    <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
-                        <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
-                        <Link to={"#"} className='text-white'>Our Team</Link>
-                    </div>
+                   
                 </div>
                 <div className='flex items-center max-sm:flex-col gap-2 max-sm:text-sm text-nowrap'>
                     <button className='h-20 w-48 py-3 px-8 max-sm:h-8 max-sm:w-20 max-sm:text-[12px] border border-white text-white hover:border-none hover:bg-custom-yellow hover:text-white flex items-center justify-center transition-all duration-300'
