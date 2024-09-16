@@ -30,7 +30,7 @@ const NavItem = ({ to, children, menuItems, onClick }: NavItemProps) => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative h-fit w-fit lg:text-lg"
+      className="relative h-fit w-fit lg:text-lg sm:text-xl"
     >
       <Link to={to || "#"} onClick={handleClick}>
         <span
@@ -108,7 +108,7 @@ const Navbar = ({
           whileInView={"visible"}
           variants={FadeRight(0.2)}
         >
-          <div className="flex flex-col items-center text-black gap-12 sm:gap-4">
+          <div className="flex flex-col items-center text-black gap-12 sm:gap-8">
             <NavItem>Home</NavItem>
             <NavItem onClick={onScrollToRooms}>Rooms</NavItem>
             <NavItem onClick={onScrollToServices}>Amenities & Services</NavItem>
@@ -129,7 +129,7 @@ const Navbar = ({
           <div className="flex items-center text-xl text-nowrap tracking-wide gap-16 max-sm:gap-3 max-sm:text-sm">
             <div className="flex items-center gap-1">
               <IoCall className="text-yellow-500 opacity-70" />
-              <span>+1 212 555 6688</span>
+              <span>+994552390083</span>
             </div>
             <div className="flex items-center gap-1">
               <span>Fax:</span>
@@ -181,7 +181,7 @@ const Navbar = ({
             </div>
           )}
           {phoneActive && <div></div>}
-          <div className="flex items-center gap-8 lg:gap-8 lg:text-lg sm:gap-4">
+          <div className="flex items-center gap-8 lg:gap-8 lg:text-lg sm:gap-12 sm:text-xl">
             <Link to={"/admin/dashboard"} className="h-10 w-32 bg-custom-yellow flex items-center justify-center rounded-md text-black">Dashboard</Link>
             <Link to={"https://www.facebook.com"}>
               <FaFacebookF className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />

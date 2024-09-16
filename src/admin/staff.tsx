@@ -215,7 +215,7 @@ const Staff = () => {
                 placeholder="Search"
                 className="h-full placeholder:text-gray-500 w-[80%] rounded-md outline-none"
               />
-              <VscSearch className="z-10" />
+              <VscSearch className="" />
             </div>
           </div>
           <div className="flex items-center justify-between">

@@ -73,7 +73,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
                 <h1 className='text-lg uppercase text-white font-semibold max-sm:text-sm'>Contact us</h1>
                 <div className='flex items-center gap-3 max-sm:gap-1'>
                     <MdCall className=' text-2xl text-custom-yellow max-sm:text-base'/>
-                    <Link to={"#"} className='text-base max-sm:text-[12px] text-nowrap text-white hover:text-custom-yellow'>+1 323-913-4688</Link>
+                    <Link to={"#"} className='text-base max-sm:text-[12px] text-nowrap text-white hover:text-custom-yellow'>+994552390083</Link>
                 </div>
                 <div className='flex items-center gap-3 max-sm:gap-1'>
                     <IoMdMail className=' text-2xl text-custom-yellow max-sm:text-sm'/>
@@ -81,7 +81,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
                 </div>
                 <div className='flex items-center gap-3'>
                     <FaLocationArrow className=' text-2xl text-custom-yellow'/>
-                    <Link to={"https://g.co/kgs/Y9cgy1y"} className='text-base text-white hover:text-custom-yellow max-sm:text-[12px]'> Old City, Sabir str. 23, <br /> near Baki 1001, Azerbaijan <br /> </Link>
+                    <Link to={"https://g.co/kgs/Y9cgy1y"} className='text-base text-white hover:text-custom-yellow max-sm:text-[12px]'>Icherisheher, Sabir Str. 25. N:1</Link>
                 </div>
             </div>
             <div className='flex flex-col gap-6 mt-12'>

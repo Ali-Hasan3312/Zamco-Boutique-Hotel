@@ -72,7 +72,7 @@ const ImgSlider = ({onScrollToRooms }: SliderProps) => {
 
     return (
       <div className="relative">
-      <Background />
+      <Background stateValue={heroCount} />
       <div 
       className="absolute top-20 max-sm:top-32 w-full mx-auto">
       {heroCount === 0 && (
