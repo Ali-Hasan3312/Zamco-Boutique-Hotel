@@ -44,10 +44,7 @@ const Staff = () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/staff/getAll`, {
         withCredentials: true,
-      });
-     console.log(user);
-     
-      
+      }); 
       const staffData = Array.isArray(res.data.users) ? res.data.users : [];
       if (staffData.length > 0) {
         const staff = staffData.map((i: any) => {
@@ -99,17 +96,27 @@ const Staff = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
+    console.log(user?.designation);
     
-    try {
-      await axios.delete(`${import.meta.env.VITE_SERVER}/api/v1/staff/delete/${id}`, {
-        withCredentials: true,
+    if(user?.designation=="Admin")
+    {
 
-      });
-      
-      fetchAllStaff(); 
-      toast.success("Member deleted successfully!");
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "An error occurred while deleting the member.");
+      try {
+        await axios.delete(`${import.meta.env.VITE_SERVER}/api/v1/staff/delete/${id}`, {
+          withCredentials: true,
+  
+        });
+        
+        fetchAllStaff(); 
+        toast.success("Member deleted successfully!");
+      } catch (error: any) {
+        toast.error(error.response?.data?.message || "An error occurred while deleting the member.");
+      }
+    }
+    if(user?.designation!="Admin")
+    {
+      toast.error("You are not authorized to delete members!");
+      return;
     }
   };
  
@@ -200,9 +207,9 @@ const Staff = () => {
       <AdminSideBar />
       <div className="overflow-y-auto -ml-4">
         <div className="h-[350px] w-full relative bg-custom-blue">
-          <div className="absolute top-2 left-4 flex items-center gap-28">
-            <span className="text-white text-2xl">Zamco Boutique Hotel</span>
-            <div className="h-12 w-64 bg-white rounded-md flex items-center justify-between px-4 font-normal">
+        <div className="absolute lg:top-4 sm:top-8 lg:left-8 sm:left-32 flex items-center gap-28">
+            <span className="text-white lg:text-2xl sm:text-3xl text-nowrap">Zamco Boutique Hotel</span>
+            <div className="h-12 w-64 bg-white rounded-md flex lg:ml-0 sm:ml-32 items-center justify-between px-4 font-normal">
               <input
                 type="text"
                 placeholder="Search"
@@ -212,28 +219,29 @@ const Staff = () => {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <div className="text-white relative top-20 text-3xl font-semibold left-4">
-              Staff
+          <div className="text-white relative lg:top-20 sm:top-28 text-3xl font-semibold lg:left-4 sm:left-32">
+          Staff
             </div>
-            <div className="h-14 w-[330px] relative top-20 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
-              <Link to={"/"}>Home</Link>
+            <div className="h-14 w-[330px] relative lg:top-20 sm:top-28 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
+            <Link to={"/"}>Home</Link>
               <div className="h-1 w-1 bg-white rounded-full"></div>
               <Link to={"/admin/dashboard"}>Dashboard</Link>
               <div className="h-1 w-1 bg-white rounded-full"></div>
               <span>Staff</span>
             </div>
           </div>
+         {user?.designation==="Admin"&&
           <button
-            className="relative top-28 hover:opacity-85 left-4 h-10 w-28 rounded-lg bg-red-700 text-white"
+            className="relative lg:top-28 sm:top-32 hover:opacity-85 lg:left-4 sm:left-28 h-10 w-28 rounded-lg bg-red-600 text-white"
             onClick={() => setShowModal(true)} // Show modal on click
           >
             Create Staff
-          </button>
+          </button>}
           <motion.div
             variants={FadeUp(0.3)}
             initial="hidden"
             whileInView={"visible"}
-            className="p-4 mt-32"
+            className="p-4 lg:mt-32 sm:mt-40 lg:ml-0 sm:ml-24"
           >
             <table {...getTableProps()} className="w-[95%] bg-white border">
               <thead>

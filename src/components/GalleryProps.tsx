@@ -14,7 +14,7 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
 
     const openModal = () => {
       setIsOpen(true);
-      console.log("Modal is true");
+      
       
     };
     const closeModal = () => setIsOpen(false);
@@ -48,8 +48,8 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
           )}
 {isOpen && (
         <div className="modal" onClick={closeModal}>
-          <span className="close">&times;</span>
-          <img src={image} alt={`Room ${room}`} className="modal-content" />
+          <span className="close absolute lg:top-[15px] lg:right-[35px] text-[#f1f1f1] lg:text-[40px] sm:text-[100px] sm:font-medium sm:top-32 sm:right-12 font-bold transition duration-300">&times;</span>
+          <img src={image} alt={`Room ${room}`} className="modal-content m-auto block lg:w-4/5 lg:h-[60vh] sm:h-[60vh] max-w-[700px]" />
         </div>
       )}
         </motion.div>

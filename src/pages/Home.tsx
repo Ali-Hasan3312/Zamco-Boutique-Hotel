@@ -5,14 +5,12 @@ import GotoTopButton from '../components/GotoTopButton'
 import Navbar from '../components/navbar'
 import ImgSlider from '../components/Slider'
 import InfoGrid from './InfoGrid'
-
 const Gallery = lazy(() => import('../pages/Gallery'));
 const Services = lazy(() => import('../pages/Services'));
 const OurRooms = lazy(() => import('../pages/OurRooms'));
 const Loader = lazy(() => import("../components/Loader"));
 const SignUp = lazy(() => import("../components/SignUp"));
 const GallerSlider = lazy(() => import("../components/GallerySlider"));
-
 const Home = () => {
   const [showImgSlider, setShowImgSlider] = useState(false);
   const contactRef = useRef<HTMLDivElement>(null);

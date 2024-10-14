@@ -1,21 +1,20 @@
+import axios from "axios";
+import { EmailAuthProvider, reauthenticateWithCredential, updatePassword, verifyBeforeUpdateEmail } from "firebase/auth";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaRegAddressBook } from "react-icons/fa";
 import { LuUser2 } from "react-icons/lu";
 import { MdCall, MdLockOutline, MdOutlineMailOutline } from "react-icons/md";
 import { VscSearch } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import AdminSideBar from "../components/AdminSidebar";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import profile from "../assets/Profile.png"
-import { Context } from "../main";
-import { EmailAuthProvider, reauthenticateWithCredential, updateEmail, updatePassword, verifyBeforeUpdateEmail } from "firebase/auth";
 import { auth } from "../firebase";
+import { Context } from "../main";
 const Settings = () => {
   const {user} = useContext(Context);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [mobile, setMobile] = useState("")
   const [address, setAddress] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState<string>("");
   const [photo, setPhoto] = useState<File | string>("");
@@ -27,18 +26,27 @@ const Settings = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  
- 
   useEffect(() => {
-   
-    if(user?.dateOfBirth){
-      setDateOfBirth(new Date(user?.dateOfBirth).toLocaleDateString);
+    if (user) {
+      setName(user.name || "");
+      setEmail(user.email || "");
+      setMobile(user.mobile || "");
+      setAddress(user.address || "");
+      // setDateOfBirth(user.dateOfBirth ? new Date(user.dateOfBirth).toLocaleDateString() : "");
+      setPhoto(user.photo || "");
     }
-  }, [dateOfBirth]);
+    if (user && user.dateOfBirth) {
+      const date = new Date(user.dateOfBirth);
+      const formattedDate = date.toISOString().substring(0, 10); // Convert to YYYY-MM-DD
+      setDateOfBirth(formattedDate);
+    }
+  }, [user]);
+ 
+ 
   const handleSaveChanges = async () => {
    
     const formData = new FormData();
-  formData.append("name", name);
+  formData.append("name", name!);
   formData.append("email", email); 
   formData.append("mobile", mobile);
   formData.append("address", address);
@@ -47,7 +55,7 @@ const Settings = () => {
     formData.append("photo", photo);
   }
     try {
-      const response = await axios.put(
+      await axios.put(
         `${import.meta.env.VITE_SERVER}/api/v1/staff/update/${user?._id}`,
         formData,
         {
@@ -70,10 +78,7 @@ const Settings = () => {
       setPhotoUrl(objectUrl); 
     }
   };
-  const handleRemoveImage = () => {
-    setPhoto(""); // Reset the photo state
-    setPhotoUrl(profile); // Set back to the default placeholder
-  };
+ 
   const handleUpdateEmail = async () => {
     if (newEmail !== confirmEmail) {
       toast.error("Emails do not match");
@@ -161,15 +166,16 @@ const Settings = () => {
     }
   };
   
- 
+  
+  
    return (
     <div className="h-screen w-full bg-custom-dashboard grid grid-cols-[20%_80%] lg:grid-cols-[20%_80%] sm:grid-cols-[1fr] gap-4 overflow-hidden">
       <AdminSideBar />
       <div className="overflow-y-auto -ml-4">
         <div className="h-[350px] w-full relative bg-custom-blue">
-          <div className="absolute top-2 left-4 flex items-center gap-28">
-            <span className="text-white text-2xl">Zamco Boutique Hotel</span>
-            <div className="h-12 w-64 bg-white rounded-md flex items-center justify-between px-4 font-normal">
+          <div className="absolute lg:top-4 sm:top-8 lg:left-8 sm:left-32 flex items-center gap-28">
+            <span className="text-white lg:text-2xl sm:text-3xl text-nowrap">Zamco Boutique Hotel</span>
+            <div className="h-12 w-64 bg-white rounded-md flex lg:ml-0 sm:ml-32 items-center justify-between px-4 font-normal">
               <input
                 type="text"
                 placeholder="Search"
@@ -179,10 +185,10 @@ const Settings = () => {
             </div>
           </div>
          <div className="flex items-center justify-between">
-         <div className="text-white relative top-20 text-3xl font-semibold left-4">
+         <div className="text-white relative lg:top-20 sm:top-28 text-3xl font-semibold lg:left-4 sm:left-32">
             Settings
           </div>
-          <div className="h-14 w-[330px] relative top-20 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
+          <div className="h-14 w-[330px] relative lg:top-20 sm:top-28 right-8 text-white text-[18px] rounded-lg bg-black/30 flex items-center justify-center gap-3">
           <Link to={"/"}>Home</Link>
           <div className="h-1 w-1 bg-white rounded-full"></div>
           <Link to={"/admin/dashboard"}>Dashboard</Link>
@@ -190,15 +196,15 @@ const Settings = () => {
           <span>Settings</span>
           </div>
          </div>
-         <div className="grid grid-cols-2">
-         <div className="h-[660px] w-[530px] bg-white ml-8 rounded-md mt-32">
+         <div className="grid lg:grid-cols-2 sm:grid-cols-1 lg:ml-0 sm:ml-56 lg:mt-0 sm:mt-16">
+         <div className="h-[660px] w-[530px] bg-white lg:ml-8 sm:ml-0 rounded-md mt-32">
               <div className="h-16 w-full border border-b border-gray-300 rounded-t-md flex items-center px-4 text-2xl font-medium">
                 <h1>Personal Information</h1>
               </div>
               <div className="h-24 w-[90%] flex gap-8 mt-12 items-center mx-auto">
                 <div>
                   <img
-                    src={user?.photo}
+                    src={typeof photo === 'string' ?  user?.photo : photoUrl}
                     className="rounded-md"
                     alt="User"
                   />
@@ -211,11 +217,7 @@ const Settings = () => {
                    type="file"
                    onChange={handlePhotoChange}
                   />
-                  <button
-                    onClick={handleRemoveImage}
-                  className="h-10 w-36 font-medium text-lg text-white bg-custom-blue hover:bg-white hover:border hover:border-custom-blue hover:text-custom-blue transition-all duration-300">
-                    Remove Image
-                  </button>
+                
                 </div>
               </div>
               <div className="mt-16 w-[90%] mx-auto grid grid-cols-2">
@@ -287,7 +289,7 @@ const Settings = () => {
                 </div>
               </div>
             </div>
-         <div className=" h-[660px] w-[530px] bg-white rounded-md mt-32">
+         <div className=" h-[660px] w-[530px] bg-white rounded-md lg:mt-32 sm:mt-8">
          <div className=" h-16 w-full border border-b border-gray-300 rounded-t-md flex items-center px-4 text-2xl font-medium">
          <h1>Change Email</h1>
          </div>
@@ -338,7 +340,7 @@ const Settings = () => {
           className="h-14 rounded w-36 font-medium text-lg text-white bg-custom-blue hover:bg-white hover:border hover:border-custom-blue hover:text-custom-blue transition-all duration-300">Change Email</button>
          </div>
           </div>
-         <div className=" h-[420px] w-[530px] bg-white ml-8 rounded-md mt-8">
+         <div className=" h-[420px] w-[530px] bg-white lg:ml-8 sm:ml-0 rounded-md mt-8">
          <div className=" h-16 w-full border border-b border-gray-300 rounded-t-md flex items-center px-4 text-2xl font-medium">
          <h1>Change Password</h1>
          </div>

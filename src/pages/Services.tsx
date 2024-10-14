@@ -16,7 +16,7 @@ const Services = forwardRef<HTMLDivElement, servicesProps>((props, ref) => {
   return (
     <div ref={ref} id="services" className="mt-24">
         <h1 className=" text-2xl tracking-wide font-medium uppercase text-center">What we offer</h1>
-        <motion.div className=" grid grid-cols-4 max-sm:grid-cols-2 gap-2 mt-10"
+        <motion.div className=" grid lg:grid-cols-4 sm:grid-cols-3 gap-2 mt-10"
         variants={FadeUp(0.3)}
         initial="hidden"
         whileInView={"visible"}

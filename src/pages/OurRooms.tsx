@@ -3,6 +3,7 @@ import { forwardRef, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import OurRoomProps from '../components/OurRoomProps';
 import { Context } from "../main";
+import Loader from "../components/Loader";
 
 interface roomsProps extends React.HTMLAttributes<HTMLDivElement> {}
 interface Room {
@@ -31,7 +32,7 @@ const OurRooms = forwardRef<HTMLDivElement, roomsProps>((props, ref) => {
           
         }
       } catch (error: any) {
-        toast.error(error.response.data.message);
+        toast.error(error.response.data.message!);
       }
     };
 
@@ -47,17 +48,21 @@ const OurRooms = forwardRef<HTMLDivElement, roomsProps>((props, ref) => {
       <h1 className="text-2xl text-center font-medium tracking-wide uppercase">
         our rooms
       </h1>
-      {rooms.map((room) => (
-        <OurRoomProps
-        key={room._id}
-          roomImage={room.photo}
-          price={room.roomPrice.toString()}
-          roomType={room.roomType}
-          description={room.roomDescription}
-          reviews={room.roomReviews.toString()}
-          to={`${room._id}`}
-        />
-      ))}
+      {rooms && rooms.length > 0 ? (
+  rooms.map((room) => (
+    <OurRoomProps
+      key={room._id}
+      roomImage={room.photo}
+      price={room.roomPrice.toString()}
+      roomType={room.roomType}
+      description={room.roomDescription}
+      reviews={room.roomReviews.toString()}
+      to={`${room._id}`}
+    />
+  ))
+) : (
+  <Loader /> // Replace this with your actual loader component or spinner
+)}
       
       
       
