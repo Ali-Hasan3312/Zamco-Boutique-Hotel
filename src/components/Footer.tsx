@@ -67,55 +67,53 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
   return (
    <div>
     
-     <div className='h-[350px] w-full bg-zinc-700 mt-16'>
-        <div className='w-[85%] grid grid-cols-3 mx-auto max-sm:gap-8 max-sm:w-[95%]'>
+     <div className='py-8 w-full bg-zinc-700 mt-16'>
+        <div className='lg:w-[85%] grid grid-cols-2 lg:grid-cols-3 mx-auto max-sm:gap-8 w-[95%]'>
             <div className='flex flex-col gap-6 mt-12'>
-                <h1 className='text-lg uppercase text-white font-semibold max-sm:text-sm'>Contact us</h1>
+                <h1 className='lg:text-lg text-xl uppercase text-white font-semibold'>Contact us</h1>
                 <div className='flex items-center gap-3 max-sm:gap-1'>
-                    <MdCall className=' text-2xl text-custom-yellow max-sm:text-base'/>
-                    <Link to={"#"} className='text-base max-sm:text-[12px] text-nowrap text-white hover:text-custom-yellow'>+994552390083</Link>
+                    <MdCall className=' lg:text-2xl  text-custom-yellow text-4xl'/>
+                    <Link to={"#"} className='lg:text-base text-xl text-nowrap text-white hover:text-custom-yellow'>+994552390083</Link>
                 </div>
                 <div className='flex items-center gap-3 max-sm:gap-1'>
-                    <IoMdMail className=' text-2xl text-custom-yellow max-sm:text-sm'/>
-                    <Link to={"mailto:info@zamcoboutiquehotel.com"} className='text-base text-white hover:text-custom-yellow max-sm:text-[12px]'>info@zamcoboutiquehotel.com</Link>
+                    <IoMdMail className=' lg:text-2xl  text-custom-yellow text-4xl'/>
+                    <Link to={"mailto:info@zamcoboutiquehotel.com"} className='lg:text-base text-xl text-white hover:text-custom-yellow'>info@zamcoboutiquehotel.com</Link>
                 </div>
                 <div className='flex items-center gap-3'>
-                    <FaLocationArrow className=' text-2xl text-custom-yellow'/>
-                    <Link to={"https://g.co/kgs/Y9cgy1y"} className='text-base text-white hover:text-custom-yellow max-sm:text-[12px]'>Icherisheher, Sabir Str. 25. N:1</Link>
+                    <FaLocationArrow className='text-4xl lg:text-2xl text-custom-yellow'/>
+                    <Link to={"https://g.co/kgs/Y9cgy1y"} className='lg:text-base text-xl text-white hover:text-custom-yellow'>Icherisheher, Sabir Str. 25. N:1</Link>
                 </div>
             </div>
             <div className='flex flex-col gap-6 mt-12'>
-                <h1 className='text-lg uppercase text-white font-semibold max-sm:text-sm text-nowrap'>Popular News</h1>
+                <h1 className='lg:text-lg text-xl uppercase text-white font-semibold text-nowrap'>Popular News</h1>
                 <div className='flex flex-col '>
                     
-                    <Link to={"#"} className='text-base max-sm:text-sm text-white hover:text-custom-yellow'>Hostel or Hotel: What to Choose and Why</Link>
-                    <span className='text-gray-400 max-sm:text-[12px]'>May 04, 2023</span>
+                    <Link to={"#"} className='lg:text-base text-xl text-white hover:text-custom-yellow'>Hotel: What to Choose and Why</Link>
+                    <span className='text-gray-400 max-sm:text-lg'>May 04, 2023</span>
                 </div>
                 <div className='flex flex-col '>
                     
                     <Link to={"#"} className='text-base max-sm:text-sm text-white hover:text-custom-yellow'>Our Guide for Travelers on a Budget</Link>
-                    <span className='text-gray-400 max-sm:text-[12px]'>May 04, 2023</span>
+                    <span className='text-gray-400 max-sm:text-lg'>May 04, 2023</span>
                 </div>
-                
-                
             </div>
             <div className='flex flex-col gap-6 mt-12'>
-                <h1 className='text-lg uppercase text-white font-semibold max-sm:text-sm'>Quick links</h1>
+                <h1 className='lg:text-lg text-xl uppercase text-white font-semibold'>Quick links</h1>
                 <div className='grid grid-cols-1 gap-1 max-sm:grid-cols-1'>
                    
-                    <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
+                    <div className='flex items-center gap-2 text-nowrap'>
                         <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
                         <button 
                         onClick={onScrollToServices}
                         className='text-white'>Our Services</button>
                     </div>
-                    <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
+                    <div className='flex items-center gap-2 text-nowrap'>
                         <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
                         <button 
                         onClick={onScrollToRooms}
                         className='text-white'>Our Rooms</button>
                     </div>
-                    <div className='flex items-center gap-2 max-sm:text-sm text-nowrap'>
+                    <div className='flex items-center gap-2 text-nowrap'>
                         <div className='h-2 w-2 max-sm:h-1 max-sm:w-1 rounded-full bg-custom-yellow'></div>
                         <button 
                         onClick={onScrollToGallery}
@@ -127,7 +125,7 @@ const Footer = ({onScrollToGallery,onScrollToServices,onScrollToRooms }: FooterP
                     <button className='h-20 w-48 py-3 px-8 max-sm:h-8 max-sm:w-20 max-sm:text-[12px] border border-white text-white hover:border-none hover:bg-custom-yellow hover:text-white flex items-center justify-center transition-all duration-300'
                     onClick={onScrollToRooms}
                     >Book Now</button>
-                    <button className='h-20 w-48 py-3 px-8  bg-custom-yellow flex items-center justify-center hover:border-none max-sm:h-8 max-sm:w-20 max-sm:text-[12px] hover:bg-black hover:text-white text-black transition-all duration-300'
+                    <button className='h-20 w-48 py-3 px-8  bg-custom-yellow flex items-center justify-center hover:border-none max-sm:h-8 max-sm:w-20 hover:bg-black hover:text-white text-black transition-all duration-300'
                     onClick={handleButtonClick}
                     >Get In Touch</button>
                      {showPopup && (

@@ -13,7 +13,7 @@ export const  InfoCard = ({ icon, title, description, to }:InfoCardProps) => {
 
   return (
     <motion.div 
-      className="flex flex-col gap-3 items-center justify-center flex-wrap text-center px-8 h-[330px] w-[370px] sm:w-[490px] lg:w-[430px] mx-auto shadow-md bg-white border hover:shadow-xl"
+      className="flex flex-col lg:gap-3 gap-10 items-center justify-center flex-wrap text-center px-8 lg:h-[330px] h-[830px] w-[85vw] lg:w-[430px] mx-auto shadow-md bg-white border hover:shadow-xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       variants={FadeLeft(0.3)}
@@ -21,14 +21,14 @@ export const  InfoCard = ({ icon, title, description, to }:InfoCardProps) => {
       whileInView={"visible"}
       whileHover={{scale:1.1}}
     >
-      <div className="hexagon w-24 h-16 font-normal bg-custom-yellow flex items-center opacity-70 justify-center">
+      <div className="hexagon lg:w-24 lg:h-16 h-28 w-36 font-normal bg-custom-yellow flex items-center opacity-70 justify-center">
         {icon}
       </div>
-      <Link to={to!} className={`uppercase text-lg font-bold text-black ${isHovered ? "tracking-[0.1rem] transition-all ease-in-out duration-500 text-custom-yellow cursor-pointer" : ""}`}>
+      <Link to={to!} className={`uppercase text-5xl lg:text-lg font-bold text-black ${isHovered ? "tracking-[0.1rem] transition-all ease-in-out duration-500 text-custom-yellow cursor-pointer" : ""}`}>
         {title}
       </Link >
-      <div className={`border  ${isHovered ? "border-custom-yellow w-32 transition-all ease-in-out duration-800" : "w-20 border-gray-300"}`}></div>
-      <span className=''>{description}</span>
+      <div className={`lg:border border-2   ${isHovered ? "border-custom-yellow w-32 transition-all ease-in-out duration-800" : "lg:w-20 w-[200px] border-gray-300"}`}></div>
+      <span className='text-5xl lg:text-base'>{description}</span>
     </motion.div>
   );
 };

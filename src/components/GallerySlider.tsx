@@ -111,7 +111,7 @@ const GallerySlider: React.FC = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <img src={slide.image} className='h-full w-full max-sm:h-[90%] object-cover' alt="" />
+                <img loading='lazy' src={slide.image} className='h-full w-full max-sm:h-[90%] object-cover' alt="" />
                 {hoveredIndex === index && (
                   <div className='h-[85%] w-[85%] border border-gray-300 absolute transition-transform ease-in-out duration-300 text-white text-3xl top-4 left-4 flex items-center justify-center'>
                     <Link to={"#"} className='hover:text-custom-yellow'>

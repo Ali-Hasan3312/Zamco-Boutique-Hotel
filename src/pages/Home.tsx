@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import ContactUs from '../components/ContactUs'
 import Footer from '../components/Footer'
 import GotoTopButton from '../components/GotoTopButton'
@@ -9,7 +9,7 @@ const Gallery = lazy(() => import('../pages/Gallery'));
 const Services = lazy(() => import('../pages/Services'));
 const OurRooms = lazy(() => import('../pages/OurRooms'));
 const Loader = lazy(() => import("../components/Loader"));
-const SignUp = lazy(() => import("../components/SignUp"));
+// const SignUp = lazy(() => import("../components/SignUp"));
 const GallerSlider = lazy(() => import("../components/GallerySlider"));
 const Home = () => {
   const [showImgSlider, setShowImgSlider] = useState(false);
@@ -54,7 +54,7 @@ const Home = () => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <div id='home' className='overflow-x-hidden'>
+      <div className=' overflow-x-hidden'>
         <Navbar
           onScrollToGallery={handleScrollToGallery}
           onScrollToServices={handleScrollToServices}
@@ -71,7 +71,7 @@ const Home = () => {
         <Gallery ref={GalleryRef}/>
         <Services ref={servicesRef}/>
         <OurRooms ref={roomsRef} />
-        <SignUp />
+        {/* <SignUp /> */}
         <GallerSlider />
         <ContactUs ref={contactRef}/>
         <Footer

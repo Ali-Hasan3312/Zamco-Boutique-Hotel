@@ -3,12 +3,10 @@ import { useEffect, useState } from "react";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import { HiMenuAlt4 } from "react-icons/hi";
-import { IoLogoGoogleplus } from "react-icons/io";
 import { IoCall, IoClose } from "react-icons/io5";
+import { SiWhatsapp } from "react-icons/si";
 import { Link } from "react-router-dom";
 import logo from "../assets/Zamco_logo.jpg";
-import { FadeRight } from "../utils/animation";
-
 interface NavItemProps {
   to?: string;
   children: React.ReactNode;
@@ -16,7 +14,6 @@ interface NavItemProps {
   tagId?: string;
   onClick?: () => void;
 }
-
 const NavItem = ({ to, children, menuItems, onClick }: NavItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleClick = (e: React.MouseEvent) => {
@@ -92,7 +89,6 @@ const Navbar = ({
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
     window.addEventListener("click", handleCloseMenu);
-
     return () => {
       window.removeEventListener("resize", resizeHandler);
       window.removeEventListener("click", handleCloseMenu);
@@ -103,24 +99,39 @@ const Navbar = ({
     <>
       {isOpen && (
         <motion.aside
-          className="bg-white p-4 z-10 absolute top-[160px] overflow-hidden"
-          initial="hidden"
-          whileInView={"visible"}
-          variants={FadeRight(0.2)}
+        className="fixed top-0 left-0 h-full w-3/4 bg-white z-[2000] p-6 flex flex-col gap-6"
+        initial={{ x: "-100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "-100%" }}
+        transition={{ duration: 0.3 }}
+      >
+        <button
+          onClick={handleCloseMenu}
+          className="self-end text-5xl text-gray-600"
         >
-          <div className="flex flex-col items-center text-black gap-12 sm:gap-8">
-            <NavItem>Home</NavItem>
-            <NavItem onClick={onScrollToRooms}>Rooms</NavItem>
-            <NavItem onClick={onScrollToServices}>Amenities & Services</NavItem>
-            <NavItem onClick={onScrollToGallery}>Our Gallery</NavItem>
-            <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
-           
-          </div>
-        </motion.aside>
+          <IoClose />
+        </button>
+        <div className="flex flex-col items-start text-black gap-6">
+          <NavItem>
+           <span className=" text-3xl">Home</span> 
+          </NavItem>
+          <NavItem onClick={onScrollToRooms}>
+          <span className=" text-3xl">Rooms</span> 
+          </NavItem>
+          <NavItem onClick={onScrollToServices}>
+           <span className=" text-3xl"> Amenities & Services</span>
+          </NavItem>
+          <NavItem onClick={onScrollToGallery}>
+            <span className=" text-3xl">Our Gallery</span>
+          </NavItem>
+          <NavItem onClick={onScrollToContact}>
+            <span className=" text-3xl">Contact Us</span>
+          </NavItem>
+        </div>
+      </motion.aside>
       )}
-
       <div className="">
-        <div className="h-[100px] w-full flex items-center justify-between px-32 max-sm:px-2 max-sm:h-24">
+        <div className="lg:h-[100px] h-32 w-full flex items-center justify-between lg:px-32 px-8">
           <div>
             <div className="h-16 w-36 text-4xl max-sm:h-8 max-sm:w-20 max-sm:text-lg max-sm:gap-2 cursor-pointer tracking-wide text-gray-800 flex items-center text-nowrap gap-4">
               <img src={logo} className="object-cover" alt="" />
@@ -131,28 +142,19 @@ const Navbar = ({
               <IoCall className="text-yellow-500 opacity-70" />
               <span>+994552390083</span>
             </div>
-            <div className="flex items-center gap-1">
-              <span>Fax:</span>
-              <p className="font-normal">+1 212 555 6699</p>
-            </div>
-            
-
-           
           </div>
         </div>
         <nav
-          className={`sticky top-0 z-50 h-16 w-full sm:text-sm sm:px-4 sm:text-nowrap bg-custom-nav text-white text-xl flex items-center justify-between px-16 tracking-wider ${
-            phoneActive ? "justify-center" : ""
-          }`}
+          className={`sticky top-0 z-50 h-24 lg:h-16 w-full text-sm px-4 sm:text-nowrap bg-custom-nav text-white md:text-xl flex items-center justify-between md:px-16 tracking-wider`}
         >
           {phoneActive ? (
             isOpen ? (
               <button
                 id="hamburger"
                 onClick={() => setIsOpen(false)}
-                className="grid place-items-center h-12 w-12 border-none outline-none cursor-pointer text-white bg-opacity-100 absolute top-[10%] left-4 text-3xl bg-inherit rounded-full z-[9]"
+                className="grid place-items-center h-12 w-12 border-none outline-none cursor-pointer text-white bg-opacity-100 absolute top-[22%] left-4 text-3xl bg-inherit rounded-full z-[9]"
               >
-                <IoClose />
+                <IoClose className="text-5xl" />
               </button>
             ) : (
               <button
@@ -161,9 +163,9 @@ const Navbar = ({
                   e.stopPropagation();
                   setIsOpen(true);
                 }}
-                className="grid place-items-center h-12 w-12 border-none outline-none cursor-pointer text-white bg-opacity-100 absolute top-[10%] left-4 text-3xl bg-inherit rounded-full z-[9]"
+                className="grid place-items-center h-12 w-12 border-none outline-none cursor-pointer text-white bg-opacity-100 absolute top-[22%] left-4 text-3xl bg-inherit rounded-full z-[9]"
               >
-                <HiMenuAlt4 />
+                <HiMenuAlt4 className="text-5xl" />
               </button>
             )
           ) : (
@@ -180,20 +182,19 @@ const Navbar = ({
               <NavItem onClick={onScrollToContact}>Contact Us</NavItem>
             </div>
           )}
-          {phoneActive && <div></div>}
-          <div className="flex items-center gap-8 lg:gap-8 lg:text-lg sm:gap-12 sm:text-xl">
-            <Link to={"/admin/dashboard"} className="h-10 w-32 bg-custom-yellow flex items-center justify-center rounded-md text-black">Dashboard</Link>
+          <div className={`flex items-center gap-8 lg:text-lg text-xl ${phoneActive? " absolute top-6 right-4" : ""}`}>
+            <Link to={"/admin/dashboard"} className="lg:h-10 h-12 px-4 bg-custom-yellow flex items-center justify-center rounded-md text-black">Dashboard</Link>
             <Link to={"https://www.facebook.com"}>
-              <FaFacebookF className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />
+              <FaFacebookF className="cursor-pointer lg:text-xl text-3xl hover:text-yellow-400 hover:transition-all duration-300" />
+            </Link>
+            <Link to={"https://chat.whatsapp.com"}>
+              <SiWhatsapp className="cursor-pointer lg:text-xl text-3xl hover:text-yellow-400 hover:transition-all duration-300" />
             </Link>
             <Link to={"https://www.twitter.com"}>
-              <FaTwitter className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />
-            </Link>
-            <Link to={"https://www.google.com"}>
-              <IoLogoGoogleplus className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300 text-2xl max-sm:text-lg" />
+              <FaTwitter className="cursor-pointer lg:text-xl text-3xl hover:text-yellow-400 hover:transition-all duration-300" />
             </Link>
             <Link to={"https://www.instagram.com"}>
-              <FiInstagram className="cursor-pointer hover:text-yellow-400 hover:transition-all duration-300" />
+              <FiInstagram className="cursor-pointer lg:text-xl text-3xl hover:text-yellow-400 hover:transition-all duration-300" />
             </Link>
           </div>
         </nav>
