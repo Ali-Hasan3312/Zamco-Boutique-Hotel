@@ -1,14 +1,12 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { FaSearchPlus } from "react-icons/fa";
-import { Link } from 'react-router-dom';
 
 interface GalleryPropsTypes{
     image: string;
     to: string;
     room:string;
 }
-const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
+const GalleryProps = ({image, room}:GalleryPropsTypes) => {
     const [isHovered, setIsHovered] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +20,7 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
   return (
     <motion.div
           
-          className={`ImageOpen h-[400px] w-[23vw] max-sm:w-[70vw] relative mx-auto`}
+          className={`ImageOpen lg:h-[400px] h-[650px] w-full lg:w-[23vw] relative`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           initial= {{opacity: 0, scale: 0.5}}
@@ -32,18 +30,16 @@ const GalleryProps = ({image, to, room}:GalleryPropsTypes) => {
         >
           <img
             src={image}
-            className={`h-full w-full hover:opacity-70 object-cover transition-transform duration-300 ease-in-out ${isHovered ? "scale-90" : ""}`}
-            alt=""
-            
+            className={`h-full w-[90vw] lg:w-full mx-auto hover:opacity-70 object-cover transition-transform duration-300 ease-in-out ${isHovered ? "scale-90" : ""}`}
           />
           {isHovered && (
-            <div className='absolute h-[330px] w-[19vw] max-sm:w-[60vw] flex items-center justify-center top-8 left-6 border border-gray-400'
+            <div className='absolute lg:h-[330px] h-[580px] w-[90%] lg:w-[19vw] flex items-center justify-center top-8 left-6 border border-gray-400'
             onClick={openModal}
             >
-              <div className='flex flex-col items-center justify-center transition-all duration-300 ease-out hover:text-custom-yellow text-2xl text-white'>
+              {/* <div className='flex opacity-0 lg:opacity-100 flex-col items-center justify-center transition-all duration-300 ease-out hover:text-custom-yellow text-2xl text-white'>
                 <FaSearchPlus />
                 <Link to={to} className='uppercase font-semibold '>{room}</Link>
-              </div>
+              </div> */}
             </div>
           )}
 {isOpen && (

@@ -11,13 +11,9 @@ const SignUp = () => {
     e.preventDefault()
     try {
       const response = await axios.post(`${import.meta.env.VITE_SERVER}/api/v1/subscribe`, {
-        
         email,
         
       });
-      
-      
-
       if (response.data) {
         toast.success(response.data.message);
         // Reset form after successful submission

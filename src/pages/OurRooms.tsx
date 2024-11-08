@@ -26,6 +26,7 @@ const OurRooms = forwardRef<HTMLDivElement, roomsProps>((props, ref) => {
         const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/room/getAll`, {
           withCredentials: true,
         });
+        console.log(res.data.rooms);
         if(res.data){
 
           setRooms(res.data.rooms);
@@ -44,8 +45,8 @@ const OurRooms = forwardRef<HTMLDivElement, roomsProps>((props, ref) => {
   
   
   return (
-    <div ref={ref} id="rooms" className="mt-16">
-      <h1 className="text-2xl text-center font-medium tracking-wide uppercase">
+    <div ref={ref} id="rooms" className="lg:mt-16 mt-48">
+      <h1 className="text-5xl lg:text-2xl text-center font-semibold tracking-wide uppercase">
         our rooms
       </h1>
       {rooms && rooms.length > 0 ? (
